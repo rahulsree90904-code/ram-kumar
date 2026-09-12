@@ -7,59 +7,108 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#fff5fa;
-  color:#24151d;
+margin:0;
+font-family:Arial,sans-serif;
+background:#fff5fa;
+color:#24151d;
 }
+
 header{
-  background:linear-gradient(135deg,#d81b72,#ff5ca8);
-  color:#fff;
-  text-align:center;
-  padding:22px 16px;
+background:linear-gradient(135deg,#d81b72,#ff5ca8);
+color:white;
+text-align:center;
+padding:25px 15px;
 }
+
 h1{margin:0;font-size:34px}
-.tag{margin:6px 0 0;font-size:15px}
-main{max-width:900px;margin:auto;padding:18px}
+
+.tag{
+margin-top:7px;
+font-size:15px;
+}
+
+main{
+max-width:900px;
+margin:auto;
+padding:18px;
+}
+
 .hero{
-  width:100%;
-  border-radius:20px;
-  display:block;
-  box-shadow:0 8px 25px #0002;
+width:100%;
+border-radius:20px;
+display:block;
+box-shadow:0 8px 25px #0002;
 }
+
 .card{
-  background:#fff;
-  margin-top:18px;
-  padding:20px;
-  border-radius:18px;
-  box-shadow:0 4px 18px #0001;
-  text-align:center;
+background:white;
+margin-top:18px;
+padding:20px;
+border-radius:18px;
+box-shadow:0 4px 18px #0001;
 }
-input,textarea{
-  width:100%;
-  padding:13px;
-  margin:7px 0;
-  border:1px solid #ddd;
-  border-radius:10px;
-  font-size:15px;
+
+.products{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
 }
+
+.product{
+border:1px solid #eee;
+border-radius:14px;
+padding:15px;
+background:#fff9fc;
+}
+
+.product label{
+font-weight:bold;
+display:block;
+margin-bottom:8px;
+}
+
+select,input,textarea{
+width:100%;
+padding:13px;
+margin-top:7px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:15px;
+}
+
 .btn{
-  display:inline-block;
-  background:#25D366;
-  color:white;
-  text-decoration:none;
-  padding:14px 24px;
-  border-radius:999px;
-  font-weight:700;
-  font-size:18px;
-  border:0;
-  cursor:pointer;
+display:block;
+width:100%;
+margin-top:18px;
+background:#25D366;
+color:white;
+text-decoration:none;
+padding:15px;
+border-radius:999px;
+font-weight:bold;
+font-size:18px;
+border:0;
+cursor:pointer;
 }
+
+.note{
+font-size:14px;
+color:#765;
+text-align:center;
+}
+
 footer{
-  text-align:center;
-  padding:24px;
-  color:#765;
+text-align:center;
+padding:25px;
+color:#765;
+}
+
+@media(max-width:600px){
+.products{
+grid-template-columns:1fr;
+}
 }
 </style>
 </head>
@@ -68,7 +117,9 @@ footer{
 
 <header>
 <h1>Ruposhi Mart</h1>
-<div class="tag">মেয়েদের নিত্যপ্রয়োজনীয় পণ্যের অনলাইন শপ</div>
+<div class="tag">
+মেয়েদের নিত্যপ্রয়োজনীয় পণ্যের অনলাইন শপ
+</div>
 </header>
 
 <main>
@@ -78,69 +129,154 @@ src="file_00000000d4f08211903b4dec1acaa1cf.png"
 alt="Ruposhi Mart">
 
 <section class="card">
-<h2>🛍️ অর্ডার করুন</h2>
+
+<h2>🛍️ পণ্য নির্বাচন করুন</h2>
+
+<div class="products">
+
+<div class="product">
+<label>👗 শাড়ি</label>
+<select id="saree">
+<option value="নেই">নিতে চাই না</option>
+<option value="শাড়ি">শাড়ি</option>
+</select>
+<input id="sareeQty" type="number" min="1" value="1" placeholder="পরিমাণ">
+</div>
+
+<div class="product">
+<label>💄 কসমেটিক্স</label>
+<select id="cosmetics">
+<option value="নেই">নিতে চাই না</option>
+<option value="কসমেটিক্স">কসমেটিক্স</option>
+</select>
+<input id="cosmeticsQty" type="number" min="1" value="1" placeholder="পরিমাণ">
+</div>
+
+<div class="product">
+<label>👜 ব্যাগ</label>
+<select id="bag">
+<option value="নেই">নিতে চাই না</option>
+<option value="ব্যাগ">ব্যাগ</option>
+</select>
+<input id="bagQty" type="number" min="1" value="1" placeholder="পরিমাণ">
+</div>
+
+<div class="product">
+<label>👚 পোশাক</label>
+<select id="dress">
+<option value="নেই">নিতে চাই না</option>
+<option value="পোশাক">পোশাক</option>
+</select>
+<input id="dressQty" type="number" min="1" value="1" placeholder="পরিমাণ">
+</div>
+
+<div class="product">
+<label>🧴 স্কিন কেয়ার</label>
+<select id="skin">
+<option value="নেই">নিতে চাই না</option>
+<option value="স্কিন কেয়ার">স্কিন কেয়ার</option>
+</select>
+<input id="skinQty" type="number" min="1" value="1" placeholder="পরিমাণ">
+</div>
+
+<div class="product">
+<label>💍 গয়না</label>
+<select id="jewelry">
+<option value="নেই">নিতে চাই না</option>
+<option value="গয়না">গয়না</option>
+</select>
+<input id="jewelryQty" type="number" min="1" value="1" placeholder="পরিমাণ">
+</div>
+
+</div>
+
+</section>
+
+<section class="card">
+
+<h2>📦 আপনার তথ্য</h2>
 
 <input id="name" type="text" placeholder="আপনার নাম">
 
 <input id="phone" type="tel" placeholder="আপনার মোবাইল নম্বর">
 
 <textarea id="address" rows="3"
-placeholder="আপনার ডেলিভারি ঠিকানা"></textarea>
+placeholder="আপনার সম্পূর্ণ ডেলিভারি ঠিকানা"></textarea>
 
-<textarea id="product" rows="2"
-placeholder="কোন পণ্য নিতে চান?"></textarea>
-
-<input id="quantity" type="number" min="1" value="1"
-placeholder="পরিমাণ">
-
-<br><br>
+<textarea id="note" rows="2"
+placeholder="অতিরিক্ত কোনো কথা থাকলে লিখুন"></textarea>
 
 <button class="btn" onclick="sendWhatsApp()">
-WhatsApp-এ অর্ডার করুন
+💚 WhatsApp-এ অর্ডার করুন
 </button>
 
-</section>
+<p class="note">
+বাটনে চাপলে আপনার অর্ডারের তথ্য WhatsApp-এ চলে যাবে।
+</p>
 
-<section class="card">
-<h2>📱 যোগাযোগ</h2>
-<p>অর্ডার বা পণ্য সম্পর্কে জানতে WhatsApp-এ যোগাযোগ করুন।</p>
-
-<a class="btn"
-href="https://wa.me/8801938374605">
-WhatsApp: 01938374605
-</a>
 </section>
 
 </main>
 
 <footer>
-© Ruposhi Mart
+© 2026 Ruposhi Mart
 </footer>
 
 <script>
+
 function sendWhatsApp(){
 
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
-  const product = document.getElementById("product").value;
-  const quantity = document.getElementById("quantity").value;
+let name=document.getElementById("name").value.trim();
+let phone=document.getElementById("phone").value.trim();
+let address=document.getElementById("address").value.trim();
+let note=document.getElementById("note").value.trim();
 
-  const message =
-`Ruposhi Mart-এ নতুন অর্ডার
-
-নাম: ${name}
-মোবাইল: ${phone}
-ঠিকানা: ${address}
-পণ্য: ${product}
-পরিমাণ: ${quantity}`;
-
-  const url =
-  "https://wa.me/8801938374605?text=" +
-  encodeURIComponent(message);
-
-  window.open(url,"_blank");
+if(name==="" || phone==="" || address===""){
+alert("দয়া করে নাম, মোবাইল নম্বর এবং ঠিকানা পূরণ করুন।");
+return;
 }
+
+let order="";
+
+function addProduct(id,qtyId){
+
+let product=document.getElementById(id).value;
+let qty=document.getElementById(qtyId).value;
+
+if(product!=="নেই"){
+order += "\n• "+product+" — "+qty+" টি";
+}
+
+}
+
+addProduct("saree","sareeQty");
+addProduct("cosmetics","cosmeticsQty");
+addProduct("bag","bagQty");
+addProduct("dress","dressQty");
+addProduct("skin","skinQty");
+addProduct("jewelry","jewelryQty");
+
+if(order===""){
+alert("দয়া করে অন্তত একটি পণ্য নির্বাচন করুন।");
+return;
+}
+
+let message=
+"Ruposhi Mart-এ নতুন অর্ডার 🛍️\n\n"+
+"👤 নাম: "+name+"\n"+
+"📱 মোবাইল: "+phone+"\n"+
+"📍 ঠিকানা: "+address+
+"\n\n🛒 অর্ডারের পণ্য:"+order+
+"\n\n📝 অতিরিক্ত তথ্য: "+(note || "নেই");
+
+let whatsapp=
+"https://wa.me/8801938374605?text="+
+encodeURIComponent(message);
+
+window.location.href=whatsapp;
+
+}
+
 </script>
 
 </body>
