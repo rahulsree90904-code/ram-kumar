@@ -1,122 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>রামকুমার | ভক্তিমূলক আধ্যাত্মিক জগৎ</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ruposhi Mart</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:"Noto Sans Bengali",Arial,sans-serif;background:#fff8ef;color:#3b2415}
-header{background:linear-gradient(135deg,#8b1e10,#e87522);color:white;text-align:center;padding:48px 20px}
-header h1{font-size:42px;margin:0 0 10px}header p{font-size:18px;margin:0}
-nav{background:#5e160d;text-align:center;padding:12px;position:sticky;top:0;z-index:2}
-nav a{color:#fff;text-decoration:none;margin:0 12px;font-weight:bold}
-.container{max-width:1050px;margin:auto;padding:28px 18px}
-.hero{background:linear-gradient(135deg,#fff0d2,#ffe1ad);border-radius:22px;padding:35px;text-align:center;box-shadow:0 8px 25px #0001}
-.hero h2{font-size:30px;margin:5px 0 12px;color:#8b1e10}
-.hero .om{font-size:55px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:24px}
-.card{background:white;border-radius:18px;padding:22px;box-shadow:0 5px 18px #0001}
-.card h3{color:#a83218;margin-top:0}
-.quote{margin-top:25px;background:#fff1cf;border-left:6px solid #d65b16;padding:20px;border-radius:12px;font-size:20px;text-align:center}
-.buttons a{display:inline-block;margin:8px;padding:12px 20px;border-radius:25px;text-decoration:none;background:#a83218;color:white}
-footer{margin-top:35px;background:#3d1b12;color:white;text-align:center;padding:25px}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#fff5fa;color:#24151d}
+header{background:linear-gradient(135deg,#d81b72,#ff5ca8);color:#fff;text-align:center;padding:22px 16px}
+h1{margin:0;font-size:34px}.tag{margin:6px 0 0;font-size:15px}
+main{max-width:900px;margin:auto;padding:18px}
+.hero{width:100%;border-radius:20px;display:block;box-shadow:0 8px 25px #0002}
+.card{background:#fff;margin-top:18px;padding:20px;border-radius:18px;box-shadow:0 4px 18px #0001;text-align:center}
+.btn{display:inline-block;background:#25D366;color:white;text-decoration:none;padding:14px 24px;border-radius:999px;font-weight:700;font-size:18px}
+footer{text-align:center;padding:24px;color:#765}
 </style>
 </head>
 <body>
-<header>
-  <div style="font-size:48px">🙏 🕉️ 🙏</div>
-  <h1>রামকুমার</h1>
-  <p>ভক্তি • ধর্ম • আধ্যাত্মিকতার সুন্দর এক ঠিকানা</p>
-</header>
-
-<nav>
-  <a href="#home">হোম</a>
-  <a href="#bani">ভক্তির বাণী</a>
-  <a href="#dhormo">ধর্মীয় কথা</a>
-  <a href="#contact">যোগাযোগ</a>
-</nav>
-
-<main class="container" id="home">
-  <section class="hero">
-    <div class="om">ॐ</div>
-    <h2>জয় শ্রীকৃষ্ণ 🙏</h2>
-    <p>“ভক্তি ও ভালোবাসায় জীবন হোক সুন্দর, শান্তিময় ও পবিত্র।”</p>
-    <div class="buttons">
-      <a href="#bani">আজকের বাণী</a>
-      <a href="#contact">আমার সঙ্গে যুক্ত হন</a>
-    </div>
-  </section>
-
-  <section id="bani">
-    <h2>🌸 আজকের ভক্তির বাণী</h2>
-    <div class="quote">
-      <div id="dailyQuote">“যে হৃদয়ে ভক্তি থাকে, সেই হৃদয়েই শান্তির আলো জ্বলে।”</div>
-      <button onclick="showNextQuote()" style="margin-top:16px;border:0;background:#a83218;color:white;padding:11px 20px;border-radius:25px;font-size:16px;cursor:pointer;">🙏 আরেকটি বাণী</button>
-    </div>
-  </section>
-
-  <section id="dhormo">
-    <h2>📿 ধর্মীয় বিষয়</h2>
-    <div class="cards">
-      <div class="card"><h3>🪷 শ্রীকৃষ্ণ</h3><p>শ্রীকৃষ্ণের জীবন, বাণী ও ভক্তির কথা নিয়ে সুন্দর আধ্যাত্মিক পোস্ট।</p></div>
-      <div class="card"><h3>🏹 শ্রী রাম</h3><p>শ্রী রামের আদর্শ, সত্য, ধর্ম ও ন্যায়ের শিক্ষা।</p></div>
-      <div class="card"><h3>🔱 মহাদেব</h3><p>মহাদেবের মহিমা, ভক্তি ও আধ্যাত্মিক ভাবনা।</p></div>
-      <div class="card"><h3>📖 শাস্ত্রের কথা</h3><p>ধর্মীয় শিক্ষা ও অনুপ্রেরণামূলক বাণী সহজ বাংলায়।</p></div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <h2>📱 আমার সঙ্গে যুক্ত হন</h2>
-    <div class="card">
-      <p>আপনার Facebook ও YouTube লিংক এখানে বসাতে পারবেন।</p>
-      <div class="buttons">
-        <a href="#" onclick="alert('এখানে আপনার Facebook লিংক বসান');return false;">Facebook</a>
-        <a href="#" onclick="alert('এখানে আপনার YouTube লিংক বসান');return false;">YouTube</a>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <p>🙏 রামকুমার • ভক্তি ও আধ্যাত্মিকতার পথে</p>
-  <p>© 2026 All Rights Reserved</p>
-</footer>
-
-<script>
-const devotionalQuotes = [
-  "“যে হৃদয়ে ভক্তি থাকে, সেই হৃদয়েই শান্তির আলো জ্বলে।”",
-  "“ভগবানের নাম স্মরণ করলে মন পবিত্র হয় এবং হৃদয়ে শান্তি আসে।”",
-  "“কর্ম করে যাও, ফলের চিন্তা ভগবানের হাতে সমর্পণ করো।”",
-  "“সত্য, দয়া ও ভালোবাসার পথই সুন্দর জীবনের পথ।”",
-  "“জয় শ্রীকৃষ্ণ—ভক্তির আলোয় প্রতিটি দিন হোক আনন্দময়।”",
-  "“শ্রী রামের আদর্শ মনে রেখে সত্য ও ন্যায়ের পথে চলি।”",
-  "“মহাদেবের স্মরণে মন হোক শান্ত, স্থির ও পবিত্র।”",
-  "“ভক্তি যেখানে, সেখানে আশা; বিশ্বাস যেখানে, সেখানে শান্তি।”"
-];
-
-let quoteIndex = new Date().getDate() % devotionalQuotes.length;
-
-function updateQuote() {
-  document.getElementById("dailyQuote").textContent = devotionalQuotes[quoteIndex];
-}
-
-function showNextQuote() {
-  quoteIndex = (quoteIndex + 1) % devotionalQuotes.length;
-  updateQuote();
-}
-
-updateQuote();
-</script>
-
-
-<section id="social" style="text-align:center;">
-  <h2>📱 আমাদের সঙ্গে যুক্ত থাকুন</h2>
-  <p>ভক্তিমূলক ভিডিও ও ধর্মীয় পোস্ট পেতে আমাদের সঙ্গে যুক্ত থাকুন। 🙏</p>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px;">
-    <a href="https://youtube.com/@krisnavojon100" target="_blank" rel="noopener" style="display:inline-block;background:#d32f2f;color:#fff;text-decoration:none;padding:12px 22px;border-radius:25px;font-weight:bold;">▶️ YouTube চ্যানেল</a>
-    <a href="https://www.facebook.com/share/14exoRq7Jj2/" target="_blank" rel="noopener" style="display:inline-block;background:#1877f2;color:#fff;text-decoration:none;padding:12px 22px;border-radius:25px;font-weight:bold;">👍 Facebook পেজ</a>
-  </div>
+<header><h1>Ruposhi Mart</h1><div class="tag">মেয়েদের নিত্যপ্রয়োজনীয় পণ্যের অনলাইন শপ</div></header>
+<main>
+<img class="hero" src="ruposhi-mart-banner.png" alt="Ruposhi Mart">
+<section class="card">
+<h2>অর্ডার ও যোগাযোগ</h2>
+<p>পণ্য ও অর্ডার সম্পর্কে জানতে WhatsApp-এ যোগাযোগ করুন।</p>
+<a class="btn" href="https://wa.me/8801938374605">WhatsApp: 01938374605</a>
 </section>
-
+</main>
+<footer>© Ruposhi Mart</footer>
 </body>
 </html>
