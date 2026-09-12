@@ -4,27 +4,144 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ruposhi Mart</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#fff5fa;color:#24151d}
-header{background:linear-gradient(135deg,#d81b72,#ff5ca8);color:#fff;text-align:center;padding:22px 16px}
-h1{margin:0;font-size:34px}.tag{margin:6px 0 0;font-size:15px}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#fff5fa;
+  color:#24151d;
+}
+header{
+  background:linear-gradient(135deg,#d81b72,#ff5ca8);
+  color:#fff;
+  text-align:center;
+  padding:22px 16px;
+}
+h1{margin:0;font-size:34px}
+.tag{margin:6px 0 0;font-size:15px}
 main{max-width:900px;margin:auto;padding:18px}
-.hero{width:100%;border-radius:20px;display:block;box-shadow:0 8px 25px #0002}
-.card{background:#fff;margin-top:18px;padding:20px;border-radius:18px;box-shadow:0 4px 18px #0001;text-align:center}
-.btn{display:inline-block;background:#25D366;color:white;text-decoration:none;padding:14px 24px;border-radius:999px;font-weight:700;font-size:18px}
-footer{text-align:center;padding:24px;color:#765}
+.hero{
+  width:100%;
+  border-radius:20px;
+  display:block;
+  box-shadow:0 8px 25px #0002;
+}
+.card{
+  background:#fff;
+  margin-top:18px;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 4px 18px #0001;
+  text-align:center;
+}
+input,textarea{
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border:1px solid #ddd;
+  border-radius:10px;
+  font-size:15px;
+}
+.btn{
+  display:inline-block;
+  background:#25D366;
+  color:white;
+  text-decoration:none;
+  padding:14px 24px;
+  border-radius:999px;
+  font-weight:700;
+  font-size:18px;
+  border:0;
+  cursor:pointer;
+}
+footer{
+  text-align:center;
+  padding:24px;
+  color:#765;
+}
 </style>
 </head>
+
 <body>
-<header><h1>Ruposhi Mart</h1><div class="tag">মেয়েদের নিত্যপ্রয়োজনীয় পণ্যের অনলাইন শপ</div></header>
+
+<header>
+<h1>Ruposhi Mart</h1>
+<div class="tag">মেয়েদের নিত্যপ্রয়োজনীয় পণ্যের অনলাইন শপ</div>
+</header>
+
 <main>
-file_00000000d4f08211903b4dec1acaa1cf.png
+
+<img class="hero"
+src="file_00000000d4f08211903b4dec1acaa1cf.png"
+alt="Ruposhi Mart">
+
 <section class="card">
-<h2>অর্ডার ও যোগাযোগ</h2>
-<p>পণ্য ও অর্ডার সম্পর্কে জানতে WhatsApp-এ যোগাযোগ করুন।</p>
-<a class="btn" href="https://wa.me/8801938374605">WhatsApp: 01938374605</a>
+<h2>🛍️ অর্ডার করুন</h2>
+
+<input id="name" type="text" placeholder="আপনার নাম">
+
+<input id="phone" type="tel" placeholder="আপনার মোবাইল নম্বর">
+
+<textarea id="address" rows="3"
+placeholder="আপনার ডেলিভারি ঠিকানা"></textarea>
+
+<textarea id="product" rows="2"
+placeholder="কোন পণ্য নিতে চান?"></textarea>
+
+<input id="quantity" type="number" min="1" value="1"
+placeholder="পরিমাণ">
+
+<br><br>
+
+<button class="btn" onclick="sendWhatsApp()">
+WhatsApp-এ অর্ডার করুন
+</button>
+
 </section>
+
+<section class="card">
+<h2>📱 যোগাযোগ</h2>
+<p>অর্ডার বা পণ্য সম্পর্কে জানতে WhatsApp-এ যোগাযোগ করুন।</p>
+
+<a class="btn"
+href="https://wa.me/8801938374605">
+WhatsApp: 01938374605
+</a>
+</section>
+
 </main>
-<footer>© Ruposhi Mart</footer>
+
+<footer>
+© Ruposhi Mart
+</footer>
+
+<script>
+function sendWhatsApp(){
+
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const address = document.getElementById("address").value;
+  const product = document.getElementById("product").value;
+  const quantity = document.getElementById("quantity").value;
+
+  const message =
+`Ruposhi Mart-এ নতুন অর্ডার
+
+নাম: ${name}
+মোবাইল: ${phone}
+ঠিকানা: ${address}
+পণ্য: ${product}
+পরিমাণ: ${quantity}`;
+
+  const url =
+  "https://wa.me/8801938374605?text=" +
+  encodeURIComponent(message);
+
+  window.open(url,"_blank");
+}
+</script>
+
 </body>
 </html>
