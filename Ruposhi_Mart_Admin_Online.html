@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ruposhi Mart</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#fff5fa;color:#24151d}
+header{background:linear-gradient(135deg,#d81b72,#ff5ca8);color:#fff;text-align:center;padding:22px 16px}
+h1{margin:0;font-size:34px}.tag{margin:6px 0 0;font-size:15px}
+main{max-width:1050px;margin:auto;padding:16px}
+.hero{width:100%;min-height:180px;object-fit:cover;border-radius:20px;display:block;box-shadow:0 8px 25px #0002;margin-bottom:10px;background:#f7d9e8}.hero-wrap{margin-bottom:20px}.upload-btn{display:block;text-align:center;background:#fff;border:2px dashed #e91e73;color:#c21868;padding:10px;border-radius:12px;font-weight:bold;cursor:pointer;margin-bottom:12px}.upload-btn input{display:none}.upload-btn.small{padding:7px;font-size:13px;margin:8px 0}
+.section-title{text-align:center;color:#c21868;margin:25px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.card{background:#fff;padding:10px;border-radius:16px;box-shadow:0 4px 16px #0001}
+.card img{width:100%;height:180px;object-fit:cover;border-radius:12px}
+.card h3{margin:8px 4px 3px;font-size:17px}.price{color:#e00062;font-weight:bold;font-size:18px;margin:4px}
+.btn{display:block;text-align:center;background:#e91e73;color:#fff;text-decoration:none;padding:10px;border-radius:999px;font-weight:bold;margin-top:8px}
+.order{background:#fff;padding:20px;border-radius:18px;box-shadow:0 4px 18px #0001;margin-top:24px}
+input,textarea,select{width:100%;padding:12px;margin:6px 0 12px;border:1px solid #ddd;border-radius:10px;font-size:15px}
+label{font-weight:bold;font-size:14px}
+.submit{border:0;width:100%;background:#25D366;color:#fff;padding:14px;border-radius:999px;font-size:17px;font-weight:bold}
+footer{text-align:center;padding:24px;color:#765}
+</style>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-storage-compat.js"></script>
+<style>
+#adminPanel{display:none;background:#fff;padding:16px;border-radius:18px;box-shadow:0 4px 18px #0001;margin:16px 0}
+.admin-box{display:grid;gap:8px}
+.admin-box button{border:0;border-radius:999px;padding:11px;font-weight:bold;cursor:pointer}
+.admin-primary{background:#e91e73;color:#fff}
+.admin-secondary{background:#eee;color:#333}
+.admin-status{font-size:14px;margin:5px 0}
+.admin-products{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:12px}
+.admin-product{border:1px solid #eee;padding:10px;border-radius:14px}
+.admin-product img{width:100%;height:130px;object-fit:cover;border-radius:10px;background:#f5e5ed}
+#adminLogin{display:none;background:#fff;padding:16px;border-radius:18px;box-shadow:0 4px 18px #0001;margin:16px 0}
+select{appearance:auto}
+</style>
+</head>
+<body>
+<header><h1>Ruposhi Mart 🛍️</h1><div class="tag">মেয়েদের নিত্যপ্রয়োজনীয় পণ্যের অনলাইন শপ</div></header>
+<div style="max-width:1050px;margin:10px auto;padding:0 16px;text-align:right">
+  <button class="admin-secondary" onclick="showAdminLogin()" style="border:0;border-radius:999px;padding:8px 13px">🔐 Admin</button>
+</div>
+
+
+<section id="adminLogin">
+  <h2>🔐 Admin Login</h2>
+  <div class="admin-box">
+    <input id="adminEmail" type="email" placeholder="Admin email">
+    <input id="adminPassword" type="password" placeholder="Admin password">
+    <button class="admin-primary" onclick="adminLogin()">Admin Login</button>
+    <div id="loginStatus" class="admin-status"></div>
+  </div>
+</section>
+
+<section id="adminPanel">
+  <h2>⚙️ Admin Panel</h2>
+  <div class="admin-box">
+    <input id="newName" placeholder="পণ্যের নাম">
+    <input id="newPrice" placeholder="দাম, যেমন 1250">
+    <select id="newCategory">
+      <option value="saree">🌸 শাড়ি</option>
+      <option value="cosmetics">💄 কসমেটিক্স</option>
+      <option value="jewelry">💎 গহনা</option>
+    </select>
+    <input id="newImage" type="file" accept="image/*">
+    <button class="admin-primary" onclick="addProduct()">➕ পণ্য যোগ করুন</button>
+    <button class="admin-secondary" onclick="adminLogout()">Logout</button>
+    <div id="adminStatus" class="admin-status"></div>
+  </div>
+  <div id="adminProducts" class="admin-products"></div>
+</section>
+<main>
+<div class="hero-wrap"><img id="heroImage" class="hero" alt="Ruposhi Mart"></div>
+
+<h2 class="section-title">🌸 শাড়ি</h2>
+<div class="grid">
+  <div class="card"><img id="img_saree-1" alt="লাল শাড়ি"><h3>লাল শাড়ি</h3><div class="price">৳ ১,২৫০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+  <div class="card"><img id="img_saree-2" alt="সবুজ শাড়ি"><h3>সবুজ শাড়ি</h3><div class="price">৳ ১,৬৫০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+  <div class="card"><img id="img_saree-3" alt="গোলাপি শাড়ি"><h3>গোলাপি শাড়ি</h3><div class="price">৳ ৯৫০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+  <div class="card"><img id="img_saree-4" alt="বেগুনি শাড়ি"><h3>বেগুনি শাড়ি</h3><div class="price">৳ ২,৫০০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+</div>
+
+<h2 class="section-title">💄 কসমেটিক্স</h2>
+<div class="grid">
+  <div class="card"><img id="img_cosmetics-1" alt="মেকআপ সেট"><h3>মেকআপ সেট</h3><div class="price">৳ ১,২০০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+  <div class="card"><img id="img_cosmetics-2" alt="ফেসওয়াশ ও স্কিন কেয়ার"><h3>ফেসওয়াশ ও স্কিন কেয়ার</h3><div class="price">৳ ৮৫০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+  <div class="card"><img id="img_cosmetics-3" alt="লিপস্টিক সেট"><h3>লিপস্টিক সেট</h3><div class="price">৳ ৬৫০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+  <div class="card"><img id="img_cosmetics-4" alt="হেয়ার কেয়ার"><h3>হেয়ার কেয়ার</h3><div class="price">৳ ৬০০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+</div>
+
+<h2 class="section-title">💎 গহনা</h2>
+<div class="grid">
+  <div class="card"><img id="img_jewelry-1" alt="হার সেট"><h3>হার সেট</h3><div class="price">৳ ১,১০০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+  <div class="card"><img id="img_jewelry-2" alt="চুড়ি সেট"><h3>চুড়ি সেট</h3><div class="price">৳ ৮৫০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+  <div class="card"><img id="img_jewelry-3" alt="কানের দুল"><h3>কানের দুল</h3><div class="price">৳ ৬৫০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+  <div class="card"><img id="img_jewelry-4" alt="নেকলেস সেট"><h3>নেকলেস সেট</h3><div class="price">৳ ১,৪৫০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+</div>
+
+<section class="order" id="order">
+<h2>🛒 অর্ডার করুন</h2>
+<form onsubmit="sendOrder(event)">
+<label>আপনার নাম</label>
+<input id="name" required placeholder="আপনার নাম">
+<label>মোবাইল নম্বর</label>
+<input id="phone" required placeholder="আপনার মোবাইল নম্বর">
+<label>পণ্য নির্বাচন করুন</label>
+<select id="product" required>
+  <option value="">পণ্য নির্বাচন করুন</option>
+  <option value="লাল শাড়ি">লাল শাড়ি — ৳ ১,২৫০</option>
+  <option value="সবুজ শাড়ি">সবুজ শাড়ি — ৳ ১,৬৫০</option>
+  <option value="গোলাপি শাড়ি">গোলাপি শাড়ি — ৳ ৯৫০</option>
+  <option value="বেগুনি শাড়ি">বেগুনি শাড়ি — ৳ ২,৫০০</option>
+  <option value="মেকআপ সেট">মেকআপ সেট — ৳ ১,২০০</option>
+  <option value="ফেসওয়াশ ও স্কিন কেয়ার">ফেসওয়াশ ও স্কিন কেয়ার — ৳ ৮৫০</option>
+  <option value="লিপস্টিক সেট">লিপস্টিক সেট — ৳ ৬৫০</option>
+  <option value="হেয়ার কেয়ার">হেয়ার কেয়ার — ৳ ৬০০</option>
+  <option value="হার সেট">হার সেট — ৳ ১,১০০</option>
+  <option value="চুড়ি সেট">চুড়ি সেট — ৳ ৮৫০</option>
+  <option value="কানের দুল">কানের দুল — ৳ ৬৫০</option>
+  <option value="নেকলেস সেট">নেকলেস সেট — ৳ ১,৪৫০</option>
+</select>
+<label>পরিমাণ</label>
+<input id="qty" type="number" min="1" value="1" required>
+<label>পেমেন্ট পদ্ধতি</label>
+<select id="payment" required onchange="showPaymentInfo()">
+  <option value="">পেমেন্ট পদ্ধতি নির্বাচন করুন</option>
+  <option value="Cash on Delivery">Cash on Delivery</option>
+  <option value="bKash">bKash</option>
+  <option value="Nagad">Nagad</option>
+  <option value="Rocket">Rocket</option>
+</select>
+<div id="paymentInfo" style="display:none;background:#fff0f5;border-left:4px solid #e91e73;padding:14px;border-radius:12px;margin:4px 0 12px">
+  <strong id="paymentTitle"></strong>
+  <div id="paymentText" style="margin-top:6px"></div>
+</div>
+<div id="transactionWrap" style="display:none">
+  <label>Transaction ID</label>
+  <input id="transaction" placeholder="bKash/Nagad/Rocket Transaction ID">
+</div>
+<label>ডেলিভারি ঠিকানা</label>
+<textarea id="address" required placeholder="আপনার সম্পূর্ণ ঠিকানা"></textarea>
+<label>অতিরিক্ত কথা (যদি থাকে)</label>
+<textarea id="note" placeholder="অতিরিক্ত তথ্য"></textarea>
+<button class="submit">WhatsApp-এ অর্ডার করুন</button>
+</form>
+</section>
+</main>
+<footer>© 2026 Ruposhi Mart<br><small>Admin ছাড়া কেউ পণ্য/ছবি যোগ করতে পারবে না।</small></footer>
+<script>
+function setImage(input,id,key){const f=input.files&&input.files[0];if(!f)return;if(!f.type.startsWith("image/")){alert("শুধু ছবি নির্বাচন করুন");return;}const r=new FileReader();r.onload=function(e){document.getElementById(id).src=e.target.result;try{localStorage.setItem("ruposhi_"+key,e.target.result)}catch(err){console.warn("ছবি সংরক্ষণ করা যায়নি",err)}};r.readAsDataURL(f)}
+function loadSavedImages(){["heroImage","saree-1","saree-2","saree-3","saree-4","cosmetics-1","cosmetics-2","cosmetics-3","cosmetics-4","jewelry-1","jewelry-2","jewelry-3","jewelry-4"].forEach(function(k){const id=k==="heroImage"?k:"img_"+k;const key=k==="heroImage"?"hero":k;const x=localStorage.getItem("ruposhi_"+key);if(x&&document.getElementById(id))document.getElementById(id).src=x})}
+window.addEventListener("DOMContentLoaded",loadSavedImages);
+function showPaymentInfo(){
+ const p=document.getElementById('payment').value;
+ const info=document.getElementById('paymentInfo');
+ const title=document.getElementById('paymentTitle');
+ const text=document.getElementById('paymentText');
+ const tx=document.getElementById('transactionWrap');
+ const input=document.getElementById('transaction');
+ if(!p){info.style.display='none';tx.style.display='none';input.required=false;return;}
+ info.style.display='block';
+ if(p==='Cash on Delivery'){
+   title.textContent='💵 Cash on Delivery';
+   text.textContent='পণ্য হাতে পাওয়ার সময় টাকা পরিশোধ করুন।';
+   tx.style.display='none'; input.required=false;
+ }else{
+   title.textContent='💳 '+p+' পেমেন্ট';
+   text.textContent='এই নম্বরে পেমেন্ট করুন: 01938374605 — পেমেন্ট করার পর Transaction ID লিখুন।';
+   tx.style.display='block'; input.required=true;
+ }
+}
+
+</script>
+<script>
+function sendOrder(e){
+ e.preventDefault();
+ const name=document.getElementById('name').value;
+ const phone=document.getElementById('phone').value;
+ const product=document.getElementById('product').value;
+ const qty=document.getElementById('qty').value;
+ const payment=document.getElementById('payment').value;
+ const transaction=document.getElementById('transaction').value;
+ const address=document.getElementById('address').value;
+ const note=document.getElementById('note').value;
+ const msg=`Ruposhi Mart অর্ডার%0A%0Aনাম: ${encodeURIComponent(name)}%0Aমোবাইল: ${encodeURIComponent(phone)}%0Aপণ্য: ${encodeURIComponent(product)}%0Aপরিমাণ: ${encodeURIComponent(qty)}%0Aপেমেন্ট: ${encodeURIComponent(payment)}%0ATransaction ID: ${encodeURIComponent(transaction)}%0Aঠিকানা: ${encodeURIComponent(address)}%0Aঅতিরিক্ত কথা: ${encodeURIComponent(note)}`;
+ window.open('https://wa.me/8801938374605?text='+msg,'_blank');
+}
+</script>
+
+<script>
+/*
+  IMPORTANT:
+  Replace the firebaseConfig values below with your own Firebase Web App config.
+  Do NOT put your admin password in this file.
+*/
+const firebaseConfig = {
+  apiKey: "PASTE_YOUR_FIREBASE_API_KEY",
+  authDomain: "PASTE_YOUR_PROJECT.firebaseapp.com",
+  projectId: "PASTE_YOUR_PROJECT_ID",
+  storageBucket: "PASTE_YOUR_PROJECT.appspot.com",
+  messagingSenderId: "PASTE_YOUR_SENDER_ID",
+  appId: "PASTE_YOUR_APP_ID"
+};
+
+let firebaseReady = false, db = null, storage = null, auth = null;
+
+try {
+  if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+  auth = firebase.auth();
+  db = firebase.firestore();
+  storage = firebase.storage();
+  firebaseReady = true;
+} catch(e) {
+  console.warn("Firebase setup required:", e);
+}
+
+const defaultProducts = [
+  ["saree-1","লাল শাড়ি","1250","saree"],
+  ["saree-2","সবুজ শাড়ি","1650","saree"],
+  ["saree-3","গোলাপি শাড়ি","950","saree"],
+  ["saree-4","বেগুনি শাড়ি","2500","saree"],
+  ["cosmetics-1","মেকআপ সেট","1200","cosmetics"],
+  ["cosmetics-2","ফেসওয়াশ ও স্কিন কেয়ার","850","cosmetics"],
+  ["cosmetics-3","লিপস্টিক সেট","650","cosmetics"],
+  ["cosmetics-4","হেয়ার কেয়ার","600","cosmetics"],
+  ["jewelry-1","হার সেট","1100","jewelry"],
+  ["jewelry-2","চুড়ি সেট","850","jewelry"],
+  ["jewelry-3","কানের দুল","650","jewelry"],
+  ["jewelry-4","নেকলেস সেট","1450","jewelry"]
+];
+
+function showAdminLogin(){ document.getElementById('adminLogin').style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); }
+function adminLogin(){
+  if(!firebaseReady){ document.getElementById('loginStatus').textContent='আগে Firebase Config বসাতে হবে।'; return; }
+  const email=document.getElementById('adminEmail').value.trim();
+  const pass=document.getElementById('adminPassword').value;
+  if(!email||!pass){ document.getElementById('loginStatus').textContent='Email ও password দিন।'; return; }
+  auth.signInWithEmailAndPassword(email,pass).then(()=>{
+    document.getElementById('loginStatus').textContent='Login সফল।';
+  }).catch(e=>document.getElementById('loginStatus').textContent='Login হয়নি: '+e.message);
+}
+function adminLogout(){ if(auth) auth.signOut(); }
+
+function money(n){ return "৳ "+Number(n||0).toLocaleString("bn-BD"); }
+
+function renderProduct(p){
+  const img=document.getElementById("img_"+p.id);
+  if(img && p.imageUrl) img.src=p.imageUrl;
+  const card=img ? img.closest(".card") : null;
+  if(card){
+    const title=card.querySelector("h3"); if(title) title.textContent=p.name;
+    const price=card.querySelector(".price"); if(price) price.textContent=money(p.price);
+  }
+  const select=document.getElementById("product");
+  if(select && !Array.from(select.options).some(o=>o.value===p.name)){
+    const opt=document.createElement("option"); opt.value=p.name; opt.textContent=p.name+" — "+money(p.price); select.appendChild(opt);
+  }
+}
+
+function loadProducts(){
+  if(!firebaseReady) return;
+  db.collection("products").onSnapshot(snap=>{
+    snap.forEach(doc=>renderProduct({id:doc.id,...doc.data()}));
+    if(auth && auth.currentUser) renderAdminProducts(snap);
+  });
+}
+
+function renderAdminProducts(snap){
+  const box=document.getElementById("adminProducts"); if(!box) return;
+  box.innerHTML="";
+  snap.forEach(doc=>{
+    const p={id:doc.id,...doc.data()};
+    const div=document.createElement("div"); div.className="admin-product";
+    div.innerHTML='<img src="'+(p.imageUrl||'')+'"><b>'+p.name+'</b><div>'+money(p.price)+'</div><button class="admin-secondary" style="margin-top:7px" onclick="deleteProduct(\''+p.id+'\')">মুছে দিন</button>';
+    box.appendChild(div);
+  });
+}
+
+async function addProduct(){
+  if(!auth || !auth.currentUser){ document.getElementById('adminStatus').textContent='আগে Admin Login করুন।'; return; }
+  const name=document.getElementById('newName').value.trim();
+  const price=document.getElementById('newPrice').value.trim();
+  const category=document.getElementById('newCategory').value;
+  const file=document.getElementById('newImage').files[0];
+  if(!name||!price||!file){ document.getElementById('adminStatus').textContent='নাম, দাম ও ছবি—তিনটিই দিন।'; return; }
+  try{
+    document.getElementById('adminStatus').textContent='ছবি আপলোড হচ্ছে...';
+    const ref=storage.ref("products/"+Date.now()+"_"+file.name);
+    const snap=await ref.put(file);
+    const url=await snap.ref.getDownloadURL();
+    await db.collection("products").add({name,price:Number(price),category,imageUrl:url,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
+    document.getElementById('adminStatus').textContent='পণ্য যোগ হয়েছে। এখন সবাই দেখতে পারবে।';
+    document.getElementById('newName').value=''; document.getElementById('newPrice').value=''; document.getElementById('newImage').value='';
+  }catch(e){ document.getElementById('adminStatus').textContent='সমস্যা: '+e.message; }
+}
+async function deleteProduct(id){
+  if(!auth || !auth.currentUser) return;
+  if(confirm("এই পণ্যটি মুছে ফেলবেন?")) await db.collection("products").doc(id).delete();
+}
+
+if(firebaseReady){
+  auth.onAuthStateChanged(user=>{
+    document.getElementById('adminPanel').style.display=user?'block':'none';
+    if(user) document.getElementById('adminLogin').style.display='block';
+    if(user) db.collection("products").get().then(renderAdminProducts).catch(()=>{});
+  });
+  loadProducts();
+}
+</script>
+</body>
+</html>
