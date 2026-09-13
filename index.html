@@ -1,5 +1,950 @@
 <!doctype html>
+<html lang="bn"><!DOCTYPE html>
 <html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ruposhi Mart | অনলাইন শপ</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#fff7fb;
+  color:#333;
+}
+
+.container{
+  width:94%;
+  max-width:1150px;
+  margin:auto;
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(135deg,#d81b60,#8e24aa);
+  color:white;
+  padding:16px 0;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  box-shadow:0 3px 15px #0003;
+}
+
+.header-box{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:bold;
+}
+
+.logo small{
+  display:block;
+  font-size:12px;
+  font-weight:normal;
+  margin-top:3px;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:15px;
+  font-weight:bold;
+}
+
+/* HERO */
+.hero{
+  margin:20px 0;
+  padding:55px 20px;
+  border-radius:25px;
+  text-align:center;
+  background:linear-gradient(135deg,#fce4ec,#ede7f6);
+}
+
+.hero h1{
+  color:#8e245d;
+  font-size:38px;
+  margin-bottom:12px;
+}
+
+.hero p{
+  font-size:17px;
+  margin-bottom:22px;
+}
+
+.btn{
+  border:none;
+  background:#d81b60;
+  color:white;
+  padding:12px 20px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:15px;
+}
+
+.btn:hover{
+  opacity:.9;
+}
+
+/* FEATURES */
+.features{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin:25px 0;
+}
+
+.feature{
+  background:white;
+  padding:20px;
+  text-align:center;
+  border-radius:18px;
+  box-shadow:0 3px 15px #00000012;
+}
+
+.feature .icon{
+  font-size:30px;
+}
+
+.feature b{
+  display:block;
+  margin:8px 0;
+}
+
+/* SEARCH */
+.search-box{
+  margin:25px 0 12px;
+}
+
+.search-box input{
+  width:100%;
+  padding:15px;
+  border:1px solid #ddd;
+  border-radius:13px;
+  font-size:16px;
+}
+
+/* CATEGORY */
+.categories{
+  display:flex;
+  gap:8px;
+  overflow:auto;
+  padding:5px 0 15px;
+}
+
+.category{
+  border:1px solid #d81b60;
+  background:white;
+  color:#d81b60;
+  padding:9px 17px;
+  border-radius:25px;
+  cursor:pointer;
+  white-space:nowrap;
+}
+
+.category.active{
+  background:#d81b60;
+  color:white;
+}
+
+/* PRODUCTS */
+h2{
+  color:#7a2453;
+  margin:25px 0 15px;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.product{
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 4px 18px #00000012;
+}
+
+.product-img{
+  height:220px;
+  background:#f1edf1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:55px;
+}
+
+.product-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.product-info{
+  padding:15px;
+}
+
+.product-name{
+  font-weight:bold;
+  font-size:17px;
+}
+
+.price{
+  color:#d81b60;
+  font-size:20px;
+  font-weight:bold;
+  margin:8px 0;
+}
+
+.buttons{
+  display:flex;
+  gap:7px;
+}
+
+.buttons button{
+  flex:1;
+}
+
+/* ORDER */
+.order-box{
+  background:white;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 4px 18px #00000012;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin-top:8px;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:13px;
+  margin:6px 0 10px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  font-size:15px;
+}
+
+textarea{
+  min-height:90px;
+}
+
+/* PAYMENT */
+.payment-info{
+  background:#fff0f6;
+  border-left:5px solid #d81b60;
+  padding:15px;
+  border-radius:10px;
+  margin:10px 0 15px;
+}
+
+.payment-number{
+  font-size:21px;
+  font-weight:bold;
+  color:#d81b60;
+}
+
+/* SOCIAL */
+.social{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:15px 0;
+}
+
+.social a{
+  color:white;
+  text-decoration:none;
+  padding:12px 18px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.whatsapp{
+  background:#25D366;
+}
+
+.facebook{
+  background:#1877F2;
+}
+
+.youtube{
+  background:#FF0000;
+}
+
+/* CART */
+.cart-button{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  width:60px;
+  height:60px;
+  border:none;
+  border-radius:50%;
+  background:#8e24aa;
+  color:white;
+  font-size:25px;
+  cursor:pointer;
+  z-index:2000;
+  box-shadow:0 5px 20px #0004;
+}
+
+.cart-count{
+  position:absolute;
+  right:-3px;
+  top:-4px;
+  background:red;
+  font-size:11px;
+  padding:4px 7px;
+  border-radius:50%;
+}
+
+.cart-panel{
+  display:none;
+  position:fixed;
+  right:18px;
+  bottom:90px;
+  width:360px;
+  max-width:calc(100% - 36px);
+  max-height:70vh;
+  overflow:auto;
+  background:white;
+  padding:18px;
+  border-radius:18px;
+  box-shadow:0 5px 30px #0004;
+  z-index:1999;
+}
+
+.cart-item{
+  padding:10px 0;
+  border-bottom:1px solid #eee;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.qty button{
+  padding:3px 8px;
+  border:1px solid #ddd;
+  background:white;
+  cursor:pointer;
+}
+
+/* FOOTER */
+footer{
+  background:#291622;
+  color:white;
+  text-align:center;
+  padding:30px 15px;
+  margin-top:35px;
+}
+
+/* MOBILE */
+@media(max-width:850px){
+  .products{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .features{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  nav{
+    display:none;
+  }
+}
+
+@media(max-width:500px){
+  .logo{
+    font-size:21px;
+  }
+
+  .hero{
+    padding:40px 15px;
+  }
+
+  .hero h1{
+    font-size:28px;
+  }
+
+  .products{
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
+
+  .product-img{
+    height:160px;
+  }
+
+  .product-info{
+    padding:10px;
+  }
+
+  .product-name{
+    font-size:14px;
+  }
+
+  .price{
+    font-size:17px;
+  }
+
+  .btn{
+    padding:9px 8px;
+    font-size:13px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+<div class="container header-box">
+
+<div class="logo">
+🛍️ Ruposhi Mart
+<small>মেয়েদের নিত্যপ্রয়োজনীয় পণ্যের অনলাইন শপ</small>
+</div>
+
+<nav>
+<a href="#products">পণ্য</a>
+<a href="#order">অর্ডার</a>
+<a href="#contact">যোগাযোগ</a>
+</nav>
+
+</div>
+</header>
+
+
+<main class="container">
+
+<!-- HERO -->
+<section class="hero">
+<h1>আপনার পছন্দ, আমাদের যত্ন ❤️</h1>
+
+<p>
+শাড়ি • কসমেটিক্স • গহনা  
+<br>
+সহজে পছন্দ করুন এবং WhatsApp-এ অর্ডার করুন।
+</p>
+
+<a href="#products">
+<button class="btn">🛍️ এখনই শপিং করুন</button>
+</a>
+</section>
+
+
+<!-- FEATURES -->
+<section class="features">
+
+<div class="feature">
+<div class="icon">🚚</div>
+<b>সহজ ডেলিভারি</b>
+<small>সুবিধামতো অর্ডার করুন</small>
+</div>
+
+<div class="feature">
+<div class="icon">📲</div>
+<b>WhatsApp অর্ডার</b>
+<small>দ্রুত অর্ডার নিশ্চিত করুন</small>
+</div>
+
+<div class="feature">
+<div class="icon">💳</div>
+<b>bKash / Nagad</b>
+<small>সহজ মোবাইল পেমেন্ট</small>
+</div>
+
+<div class="feature">
+<div class="icon">❤️</div>
+<b>বিশ্বস্ত সেবা</b>
+<small>আপনার সন্তুষ্টিই আমাদের লক্ষ্য</small>
+</div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+<section id="products">
+
+<h2>✨ আমাদের পণ্য</h2>
+
+<div class="search-box">
+<input
+type="text"
+id="search"
+placeholder="🔎 পণ্যের নাম লিখে খুঁজুন..."
+>
+</div>
+
+<div class="categories">
+
+<button class="category active" data-category="সব">
+সব পণ্য
+</button>
+
+<button class="category" data-category="শাড়ি">
+শাড়ি
+</button>
+
+<button class="category" data-category="কসমেটিক্স">
+কসমেটিক্স
+</button>
+
+<button class="category" data-category="গহনা">
+গহনা
+</button>
+
+</div>
+
+<div class="products" id="productList"></div>
+
+</section>
+
+
+<!-- ORDER -->
+<section id="order">
+
+<h2>📦 অর্ডার করুন</h2>
+
+<div class="order-box">
+
+<form onsubmit="sendOrder(event)">
+
+<label>আপনার নাম</label>
+<input id="customerName" required placeholder="আপনার নাম লিখুন">
+
+
+<label>মোবাইল নম্বর</label>
+<input id="customerPhone" required placeholder="01XXXXXXXXX">
+
+
+<label>পণ্য নির্বাচন করুন</label>
+<select id="productSelect" required>
+<option value="">পণ্য নির্বাচন করুন</option>
+</select>
+
+
+<label>পরিমাণ</label>
+<input
+id="quantity"
+type="number"
+value="1"
+min="1"
+required
+>
+
+
+<label>পেমেন্ট পদ্ধতি</label>
+
+<select id="paymentMethod" required>
+<option value="">পেমেন্ট নির্বাচন করুন</option>
+<option value="Cash on Delivery">Cash on Delivery</option>
+<option value="bKash">bKash</option>
+<option value="Nagad">Nagad</option>
+</select>
+
+
+<div class="payment-info">
+
+<b>💳 bKash / Nagad পেমেন্ট নম্বর</b>
+
+<div class="payment-number">
+01938374605
+</div>
+
+<small>
+bKash অথবা Nagad-এ পেমেন্ট করার পর Transaction ID নিচে লিখুন।
+</small>
+
+</div>
+
+
+<label>Transaction ID</label>
+<input
+id="transactionId"
+placeholder="bKash/Nagad Transaction ID"
+>
+
+
+<label>ডেলিভারি ঠিকানা</label>
+
+<textarea
+id="address"
+required
+placeholder="আপনার সম্পূর্ণ ঠিকানা লিখুন"
+></textarea>
+
+
+<label>অতিরিক্ত নোট</label>
+
+<textarea
+id="note"
+placeholder="রং, সাইজ বা অন্য কোনো নির্দেশনা"
+></textarea>
+
+
+<button
+class="btn"
+style="width:100%;margin-top:10px"
+type="submit"
+>
+📲 WhatsApp-এ অর্ডার পাঠান
+</button>
+
+</form>
+
+</div>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact">
+
+<h2>📱 আমাদের সাথে যোগাযোগ</h2>
+
+<div class="social">
+
+<a
+class="whatsapp"
+href="https://wa.me/8801938374605"
+target="_blank"
+>
+📲 WhatsApp
+</a>
+
+<a
+class="facebook"
+href="https://www.facebook.com/share/14exoRq7Jj2/"
+target="_blank"
+>
+🔵 Facebook
+</a>
+
+<a
+class="youtube"
+href="https://youtube.com/@krisnavojon100"
+target="_blank"
+>
+🔴 YouTube
+</a>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- CART -->
+<div class="cart-panel" id="cartPanel">
+
+<h3>🛒 আপনার কার্ট</h3>
+
+<div id="cartItems"></div>
+
+<hr>
+
+<p>
+<b>মোট: ৳<span id="cartTotal">0</span></b>
+</p>
+
+<button
+class="btn"
+style="width:100%;margin-top:10px"
+onclick="orderCart()"
+>
+📦 কার্ট দিয়ে অর্ডার
+</button>
+
+</div>
+
+
+<button class="cart-button" onclick="toggleCart()">
+🛒
+<span class="cart-count" id="cartCount">0</span>
+</button>
+
+
+<!-- FOOTER -->
+<footer>
+
+<p>
+<b>Ruposhi Mart</b>
+</p>
+
+<p style="margin:8px 0">
+bKash / Nagad: <b>01938374605</b>
+</p>
+
+<p>
+© 2026 Ruposhi Mart — All Rights Reserved
+</p>
+
+</footer>
+
+
+<script>
+
+/* =========================
+   PRODUCT DATA
+========================= */
+
+const products = [
+
+{
+name:"লাল শাড়ি",
+category:"শাড়ি",
+price:1250
+},
+
+{
+name:"সবুজ শাড়ি",
+category:"শাড়ি",
+price:1650
+},
+
+{
+name:"গোলাপি শাড়ি",
+category:"শাড়ি",
+price:950
+},
+
+{
+name:"বেগুনি শাড়ি",
+category:"শাড়ি",
+price:2500
+},
+
+{
+name:"মেকআপ সেট",
+category:"কসমেটিক্স",
+price:1200
+},
+
+{
+name:"ফেসওয়াশ ও স্কিন কেয়ার",
+category:"কসমেটিক্স",
+price:850
+},
+
+{
+name:"লিপস্টিক সেট",
+category:"কসমেটিক্স",
+price:650
+},
+
+{
+name:"হেয়ার কেয়ার",
+category:"কসমেটিক্স",
+price:600
+},
+
+{
+name:"হার সেট",
+category:"গহনা",
+price:1100
+},
+
+{
+name:"চুড়ি সেট",
+category:"গহনা",
+price:850
+},
+
+{
+name:"কানের দুল",
+category:"গহনা",
+price:650
+},
+
+{
+name:"নেকলেস সেট",
+category:"গহনা",
+price:1450
+}
+
+];
+
+
+let selectedCategory = "সব";
+
+let cart =
+JSON.parse(localStorage.getItem("ruposhiCart")) || [];
+
+
+/* =========================
+   DISPLAY PRODUCTS
+========================= */
+
+function displayProducts(){
+
+const list =
+document.getElementById("productList");
+
+const search =
+document.getElementById("search")
+.value
+.toLowerCase();
+
+list.innerHTML = "";
+
+products.forEach((product,index)=>{
+
+if(
+selectedCategory !== "সব" &&
+product.category !== selectedCategory
+){
+return;
+}
+
+if(
+search &&
+!product.name.toLowerCase().includes(search)
+){
+return;
+}
+
+const card =
+document.createElement("div");
+
+card.className = "product";
+
+card.innerHTML = `
+
+<div class="product-img">
+📷
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+${product.name}
+</div>
+
+<div class="price">
+৳${product.price}
+</div>
+
+<div class="buttons">
+
+<button
+class="btn"
+onclick="addToCart(${index})"
+>
+🛒 কার্ট
+</button>
+
+<button
+class="btn"
+onclick="buyNow(${index})"
+>
+অর্ডার
+</button>
+
+</div>
+
+</div>
+`;
+
+list.appendChild(card);
+
+});
+
+}
+
+
+/* =========================
+   CATEGORY
+========================= */
+
+document
+.querySelectorAll(".category")
+.forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+document
+.querySelectorAll(".category")
+.forEach(b=>b.classList.remove("active"));
+
+button.classList.add("active");
+
+selectedCategory =
+button.dataset.category;
+
+displayProducts();
+
+});
+
+});
+
+
+/* =========================
+   SEARCH
+========================= */
+
+document
+.getElementById("search")
+.addEventListener("input",displayProducts);
+
+
+/* =========================
+   SELECT PRODUCTS
+========================= */
+
+const productSelect =
+document.getElementById("productSelect");
+
+products.forEach(product=>{
+
+const option =
+document.createElement("option");
+
+option.value = product.name;
+
+option.textContent =
+product.name + " — ৳" + product.price;
+
+productSelect.appendChild(option);
+
+});
+
+
+/* =========================
+   CART
+========================= */
+
+function addToCart(index){
+
+const product = products[index];
+
+const existing =
+cart.find(item=>item.name===product.name);
+
+if(existing){
+
+existing.quantity++;
+
+}else{
+
+cart.push({
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -82,9 +1027,4 @@ function sendOrder(e){
  const qty=document.getElementById('qty').value;
  const address=document.getElementById('address').value;
  const note=document.getElementById('note').value;
- const msg=`Ruposhi Mart অর্ডার%0A%0Aনাম: ${encodeURIComponent(name)}%0Aমোবাইল: ${encodeURIComponent(phone)}%0Aপণ্য: ${encodeURIComponent(product)}%0Aপরিমাণ: ${encodeURIComponent(qty)}%0Aঠিকানা: ${encodeURIComponent(address)}%0Aঅতিরিক্ত কথা: ${encodeURIComponent(note)}`;
- window.open('https://wa.me/8801938374605?text='+msg,'_blank');
-}
-</script>
-</body>
-</html>
+ const msg=`Ruposhi Mart অর্ডার%0A%0Aনাম: ${encodeURIComponent(name)}%0Aমোবাইল: ${encodeURIComponent(phone)}%0Aপণ্য: ${encodeURIComponent(product)}%0Aপরিমাণ: ${encodeURIComponent(qty)}%0Aঠিকানা: ${encodeURIComponent(address)}%0Aঅতিরিক্ত কথা: ${encod
