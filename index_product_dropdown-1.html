@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ruposhi Mart</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#fff5fa;color:#24151d}
+header{background:linear-gradient(135deg,#d81b72,#ff5ca8);color:#fff;text-align:center;padding:22px 16px}
+h1{margin:0;font-size:34px}.tag{margin:6px 0 0;font-size:15px}
+main{max-width:1050px;margin:auto;padding:16px}
+.hero{width:100%;min-height:180px;object-fit:cover;border-radius:20px;display:block;box-shadow:0 8px 25px #0002;margin-bottom:10px;background:#f7d9e8}.hero-wrap{margin-bottom:20px}.upload-btn{display:block;text-align:center;background:#fff;border:2px dashed #e91e73;color:#c21868;padding:10px;border-radius:12px;font-weight:bold;cursor:pointer;margin-bottom:12px}.upload-btn input{display:none}.upload-btn.small{padding:7px;font-size:13px;margin:8px 0}
+.section-title{text-align:center;color:#c21868;margin:25px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.card{background:#fff;padding:10px;border-radius:16px;box-shadow:0 4px 16px #0001}
+.card img{width:100%;height:180px;object-fit:cover;border-radius:12px}
+.card h3{margin:8px 4px 3px;font-size:17px}.price{color:#e00062;font-weight:bold;font-size:18px;margin:4px}
+.btn{display:block;text-align:center;background:#e91e73;color:#fff;text-decoration:none;padding:10px;border-radius:999px;font-weight:bold;margin-top:8px}
+.order{background:#fff;padding:20px;border-radius:18px;box-shadow:0 4px 18px #0001;margin-top:24px}
+input,textarea,select{width:100%;padding:12px;margin:6px 0 12px;border:1px solid #ddd;border-radius:10px;font-size:15px}
+label{font-weight:bold;font-size:14px}
+.submit{border:0;width:100%;background:#25D366;color:#fff;padding:14px;border-radius:999px;font-size:17px;font-weight:bold}
+footer{text-align:center;padding:24px;color:#765}
+</style>
+</head>
+<body>
+<header><h1>Ruposhi Mart 🛍️</h1><div class="tag">মেয়েদের নিত্যপ্রয়োজনীয় পণ্যের অনলাইন শপ</div></header>
+<main>
+<div class="hero-wrap"><img id="heroImage" class="hero" alt="Ruposhi Mart"><label class="upload-btn">📷 গ্যালারি থেকে ব্যানার ছবি দিন<input type="file" accept="image/*" onchange="setImage(this,'heroImage','ruposhi_hero')"></label></div>
+
+<h2 class="section-title">🌸 শাড়ি</h2>
+<div class="grid">
+  <div class="card"><img id="img_saree-1" alt="লাল শাড়ি"><label class="upload-btn small">📷 ছবি দিন<input type="file" accept="image/*" onchange="setImage(this,'img_saree-1','saree-1')"></label><h3>লাল শাড়ি</h3><div class="price">৳ ১,২৫০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+  <div class="card"><img id="img_saree-2" alt="সবুজ শাড়ি"><label class="upload-btn small">📷 ছবি দিন<input type="file" accept="image/*" onchange="setImage(this,'img_saree-2','saree-2')"></label><h3>সবুজ শাড়ি</h3><div class="price">৳ ১,৬৫০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+  <div class="card"><img id="img_saree-3" alt="গোলাপি শাড়ি"><label class="upload-btn small">📷 ছবি দিন<input type="file" accept="image/*" onchange="setImage(this,'img_saree-3','saree-3')"></label><h3>গোলাপি শাড়ি</h3><div class="price">৳ ৯৫০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+  <div class="card"><img id="img_saree-4" alt="বেগুনি শাড়ি"><label class="upload-btn small">📷 ছবি দিন<input type="file" accept="image/*" onchange="setImage(this,'img_saree-4','saree-4')"></label><h3>বেগুনি শাড়ি</h3><div class="price">৳ ২,৫০০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+</div>
+
+<h2 class="section-title">💄 কসমেটিক্স</h2>
+<div class="grid">
+  <div class="card"><img id="img_cosmetics-1" alt="মেকআপ সেট"><label class="upload-btn small">📷 ছবি দিন<input type="file" accept="image/*" onchange="setImage(this,'img_cosmetics-1','cosmetics-1')"></label><h3>মেকআপ সেট</h3><div class="price">৳ ১,২০০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+  <div class="card"><img id="img_cosmetics-2" alt="ফেসওয়াশ ও স্কিন কেয়ার"><label class="upload-btn small">📷 ছবি দিন<input type="file" accept="image/*" onchange="setImage(this,'img_cosmetics-2','cosmetics-2')"></label><h3>ফেসওয়াশ ও স্কিন কেয়ার</h3><div class="price">৳ ৮৫০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+  <div class="card"><img id="img_cosmetics-3" alt="লিপস্টিক সেট"><label class="upload-btn small">📷 ছবি দিন<input type="file" accept="image/*" onchange="setImage(this,'img_cosmetics-3','cosmetics-3')"></label><h3>লিপস্টিক সেট</h3><div class="price">৳ ৬৫০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+  <div class="card"><img id="img_cosmetics-4" alt="হেয়ার কেয়ার"><label class="upload-btn small">📷 ছবি দিন<input type="file" accept="image/*" onchange="setImage(this,'img_cosmetics-4','cosmetics-4')"></label><h3>হেয়ার কেয়ার</h3><div class="price">৳ ৬০০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+</div>
+
+<h2 class="section-title">💎 গহনা</h2>
+<div class="grid">
+  <div class="card"><img id="img_jewelry-1" alt="হার সেট"><label class="upload-btn small">📷 ছবি দিন<input type="file" accept="image/*" onchange="setImage(this,'img_jewelry-1','jewelry-1')"></label><h3>হার সেট</h3><div class="price">৳ ১,১০০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+  <div class="card"><img id="img_jewelry-2" alt="চুড়ি সেট"><label class="upload-btn small">📷 ছবি দিন<input type="file" accept="image/*" onchange="setImage(this,'img_jewelry-2','jewelry-2')"></label><h3>চুড়ি সেট</h3><div class="price">৳ ৮৫০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+  <div class="card"><img id="img_jewelry-3" alt="কানের দুল"><label class="upload-btn small">📷 ছবি দিন<input type="file" accept="image/*" onchange="setImage(this,'img_jewelry-3','jewelry-3')"></label><h3>কানের দুল</h3><div class="price">৳ ৬৫০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+  <div class="card"><img id="img_jewelry-4" alt="নেকলেস সেট"><label class="upload-btn small">📷 ছবি দিন<input type="file" accept="image/*" onchange="setImage(this,'img_jewelry-4','jewelry-4')"></label><h3>নেকলেস সেট</h3><div class="price">৳ ১,৪৫০</div><a class="btn" href="#order">অর্ডার করুন</a></div>
+</div>
+
+<section class="order" id="order">
+<h2>🛒 অর্ডার করুন</h2>
+<form onsubmit="sendOrder(event)">
+<label>আপনার নাম</label>
+<input id="name" required placeholder="আপনার নাম">
+<label>মোবাইল নম্বর</label>
+<input id="phone" required placeholder="আপনার মোবাইল নম্বর">
+<label>পণ্য নির্বাচন করুন</label>
+<select id="product" required>
+  <option value="">পণ্য নির্বাচন করুন</option>
+  <option value="লাল শাড়ি">লাল শাড়ি — ৳ ১,২৫০</option>
+  <option value="সবুজ শাড়ি">সবুজ শাড়ি — ৳ ১,৬৫০</option>
+  <option value="গোলাপি শাড়ি">গোলাপি শাড়ি — ৳ ৯৫০</option>
+  <option value="বেগুনি শাড়ি">বেগুনি শাড়ি — ৳ ২,৫০০</option>
+  <option value="মেকআপ সেট">মেকআপ সেট — ৳ ১,২০০</option>
+  <option value="ফেসওয়াশ ও স্কিন কেয়ার">ফেসওয়াশ ও স্কিন কেয়ার — ৳ ৮৫০</option>
+  <option value="লিপস্টিক সেট">লিপস্টিক সেট — ৳ ৬৫০</option>
+  <option value="হেয়ার কেয়ার">হেয়ার কেয়ার — ৳ ৬০০</option>
+  <option value="হার সেট">হার সেট — ৳ ১,১০০</option>
+  <option value="চুড়ি সেট">চুড়ি সেট — ৳ ৮৫০</option>
+  <option value="কানের দুল">কানের দুল — ৳ ৬৫০</option>
+  <option value="নেকলেস সেট">নেকলেস সেট — ৳ ১,৪৫০</option>
+</select>
+<label>পরিমাণ</label>
+<input id="qty" type="number" min="1" value="1" required>
+<label>ডেলিভারি ঠিকানা</label>
+<textarea id="address" required placeholder="আপনার সম্পূর্ণ ঠিকানা"></textarea>
+<label>অতিরিক্ত কথা (যদি থাকে)</label>
+<textarea id="note" placeholder="অতিরিক্ত তথ্য"></textarea>
+<button class="submit">WhatsApp-এ অর্ডার করুন</button>
+</form>
+</section>
+</main>
+<footer>© 2026 Ruposhi Mart</footer>
+<script>
+function setImage(input,id,key){const f=input.files&&input.files[0];if(!f)return;if(!f.type.startsWith("image/")){alert("শুধু ছবি নির্বাচন করুন");return;}const r=new FileReader();r.onload=function(e){document.getElementById(id).src=e.target.result;try{localStorage.setItem("ruposhi_"+key,e.target.result)}catch(err){console.warn("ছবি সংরক্ষণ করা যায়নি",err)}};r.readAsDataURL(f)}
+function loadSavedImages(){["heroImage","saree-1","saree-2","saree-3","saree-4","cosmetics-1","cosmetics-2","cosmetics-3","cosmetics-4","jewelry-1","jewelry-2","jewelry-3","jewelry-4"].forEach(function(k){const id=k==="heroImage"?k:"img_"+k;const key=k==="heroImage"?"hero":k;const x=localStorage.getItem("ruposhi_"+key);if(x&&document.getElementById(id))document.getElementById(id).src=x})}
+window.addEventListener("DOMContentLoaded",loadSavedImages);
+</script>
+<script>
+function sendOrder(e){
+ e.preventDefault();
+ const name=document.getElementById('name').value;
+ const phone=document.getElementById('phone').value;
+ const product=document.getElementById('product').value;
+ const qty=document.getElementById('qty').value;
+ const address=document.getElementById('address').value;
+ const note=document.getElementById('note').value;
+ const msg=`Ruposhi Mart অর্ডার%0A%0Aনাম: ${encodeURIComponent(name)}%0Aমোবাইল: ${encodeURIComponent(phone)}%0Aপণ্য: ${encodeURIComponent(product)}%0Aপরিমাণ: ${encodeURIComponent(qty)}%0Aঠিকানা: ${encodeURIComponent(address)}%0Aঅতিরিক্ত কথা: ${encodeURIComponent(note)}`;
+ window.open('https://wa.me/8801938374605?text='+msg,'_blank');
+}
+</script>
+</body>
+</html>
