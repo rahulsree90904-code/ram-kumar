@@ -331,3 +331,47 @@ render();
 
 </body>
 </html>
+<section class="pay" id="reviewSection">
+
+<h2>⭐ Customer Reviews</h2>
+
+<div id="reviewForm">
+
+<div class="field">
+<label>আপনার নাম</label>
+<input id="reviewName" type="text" placeholder="আপনার নাম লিখুন">
+</div>
+
+<div class="field">
+<label>আপনার রেটিং</label>
+
+<div id="stars" style="font-size:32px;cursor:pointer;">
+<span onclick="setRating(1)">☆</span>
+<span onclick="setRating(2)">☆</span>
+<span onclick="setRating(3)">☆</span>
+<span onclick="setRating(4)">☆</span>
+<span onclick="setRating(5)">☆</span>
+</div>
+
+<input type="hidden" id="reviewRating" value="0">
+
+<div class="field">
+<label>আপনার রিভিউ</label>
+<textarea id="reviewText"
+placeholder="আপনার অভিজ্ঞতা লিখুন..."
+style="width:100%;min-height:100px;padding:11px;border:1px solid #ddd;border-radius:10px;"></textarea>
+</div>
+
+<button onclick="submitReview()">
+⭐ Review Submit করুন
+</button>
+
+</div>
+
+<hr>
+
+<h3>সবার রিভিউ</h3>
+
+<div id="reviews"></div>
+
+</section>
