@@ -7,142 +7,32 @@
 
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;
- font-family:Arial,"Noto Sans Bengali",sans-serif;
- background:#f7f7fb;
- color:#222
-}
-header{
- background:linear-gradient(135deg,#7b2ff7,#f107a3);
- color:#fff;
- padding:24px 16px;
- text-align:center
-}
+body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#f7f7fb;color:#222}
+header{background:linear-gradient(135deg,#7b2ff7,#f107a3);color:#fff;padding:24px 16px;text-align:center}
 header h1{margin:0 0 7px;font-size:28px}
 header p{margin:0;opacity:.92}
-
-.container{
- max-width:1000px;
- margin:auto;
- padding:18px
-}
-
-.notice{
- background:#fff;
- border-radius:16px;
- padding:14px;
- margin-bottom:18px;
- box-shadow:0 4px 18px #00000010
-}
-
-.grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
- gap:16px
-}
-
-.card{
- background:#fff;
- border-radius:18px;
- overflow:hidden;
- box-shadow:0 5px 20px #00000012
-}
-
-.card img{
- width:100%;
- height:260px;
- object-fit:cover
-}
-
+.container{max-width:1000px;margin:auto;padding:18px}
+.notice,.pay{background:#fff;border-radius:16px;padding:16px;margin-bottom:18px;box-shadow:0 4px 18px #00000010}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 20px #00000012}
+.card img{width:100%;height:260px;object-fit:cover}
 .info{padding:14px}
-
-.product-no{
- display:inline-block;
- background:#f0e7ff;
- color:#7b2ff7;
- padding:5px 9px;
- border-radius:7px;
- font-weight:bold;
- font-size:14px;
- margin-bottom:7px
-}
-
-.price{
- font-size:22px;
- font-weight:bold;
- color:#7b2ff7
-}
-
-button,.btn{
- border:0;
- border-radius:10px;
- padding:11px 15px;
- background:#7b2ff7;
- color:#fff;
- font-weight:bold;
- cursor:pointer;
- text-decoration:none;
- display:inline-block;
- margin:4px 2px
-}
-
-.pay{
- margin-top:20px;
- background:#fff;
- border-radius:18px;
- padding:18px;
- box-shadow:0 5px 20px #00000010
-}
-
-.pay b{color:#7b2ff7}
-
+.product-no{display:inline-block;background:#f0e7ff;color:#7b2ff7;padding:5px 9px;border-radius:7px;font-weight:bold;font-size:14px}
+.price{font-size:22px;font-weight:bold;color:#7b2ff7;margin:7px 0}
+button,.btn{border:0;border-radius:10px;padding:11px 15px;background:#7b2ff7;color:#fff;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block;margin:4px 2px}
+.paybtn{display:block;width:100%;margin:9px 0;text-align:center;font-size:16px}
+.bk{background:#e2136e}
+.ng{background:#f58220}
+.ro{background:#7b2ff7}
 #admin{display:none}
-
-.row{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:10px
-}
-
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .field{margin:10px 0}
-
-.field label{
- display:block;
- font-weight:bold;
- margin-bottom:5px
-}
-
-.field input{
- width:100%;
- padding:11px;
- border:1px solid #ddd;
- border-radius:10px
-}
-
-.item-edit{
- border:1px solid #eee;
- border-radius:14px;
- padding:12px;
- margin:12px 0
-}
-
-.item-edit img{
- width:80px;
- height:80px;
- object-fit:cover;
- border-radius:10px
-}
-
-footer{
- text-align:center;
- padding:25px;
- color:#666
-}
-
-@media(max-width:600px){
- .row{grid-template-columns:1fr}
-}
+.field label{display:block;font-weight:bold;margin-bottom:5px}
+.field input{width:100%;padding:11px;border:1px solid #ddd;border-radius:10px}
+.item-edit{border:1px solid #eee;border-radius:14px;padding:12px;margin:12px 0}
+.item-edit img{width:80px;height:80px;object-fit:cover;border-radius:10px}
+footer{text-align:center;padding:25px;color:#666}
+@media(max-width:600px){.row{grid-template-columns:1fr}}
 </style>
 </head>
 
@@ -157,27 +47,47 @@ footer{
 
 <div class="notice">
 <b>অর্ডার করতে:</b>
-পছন্দের প্রোডাক্টের “WhatsApp অর্ডার” চাপুন অথবা Telegram-এ যোগাযোগ করুন।
+পছন্দের প্রোডাক্টের WhatsApp অর্ডার চাপুন।
 </div>
 
 <section id="products" class="grid"></section>
 
 <section class="pay">
-<h2>💳 পেমেন্ট</h2>
-<p>বিকাশ: <b id="bkash"></b></p>
-<p>নগদ: <b id="nagad"></b></p>
-<p>Rocket: <b id="rocket"></b></p>
-<p>WhatsApp: <b id="whatsapp"></b></p>
+<h2>💳 পেমেন্ট করুন</h2>
 
-<a id="telegram" class="btn" target="_blank">
-✈️ Telegram
-</a>
+<p>যে মাধ্যমে টাকা পাঠাতে চান, নিচের বাটনে চাপুন।</p>
+
+<button class="paybtn bk" onclick="sendMoney('bKash')">
+💗 bKash Send Money
+</button>
+
+<button class="paybtn ng" onclick="sendMoney('Nagad')">
+🟠 Nagad Send Money
+</button>
+
+<button class="paybtn ro" onclick="sendMoney('Rocket')">
+🚀 Rocket Send Money
+</button>
+
+<div id="paymentInfo" style="display:none;margin-top:15px;padding:15px;background:#f7f7fb;border-radius:12px">
+<b id="payTitle"></b>
+<p>Send Money নম্বর:</p>
+<h2 id="payNumber" style="color:#7b2ff7"></h2>
+<p>টাকা পাঠানোর পর আপনার <b>Transaction ID</b> সংরক্ষণ করে রাখুন।</p>
+</div>
+
+<p>bKash/Nagad/Rocket নম্বর: <b id="mainNumber"></b></p>
+
+</section>
+
+<section class="pay">
+<h2>✈️ Telegram</h2>
+<a id="telegram" class="btn" target="_blank">Telegram</a>
 </section>
 
 <section class="pay">
 
 <h2>🔐 Admin Panel</h2>
-
 <p>শুধু আপনার নিজের ডিভাইসে তথ্য পরিবর্তনের জন্য।</p>
 
 <button onclick="login()">Admin Login</button>
@@ -201,7 +111,7 @@ footer{
 </div>
 
 <div class="field">
-<label>Telegram Username (যেমন @name)</label>
+<label>Telegram Username</label>
 <input id="aTelegram">
 </div>
 
@@ -215,299 +125,205 @@ footer{
 
 </main>
 
-<footer>
-© Ruposhi Fashion
-</footer>
+<footer>© Ruposhi Fashion</footer>
 
 <script>
 
 const DEFAULT_PRODUCTS=[
-
 {
- id:"RF-001",
- name:"Elegant Ladies Dress",
- price:"৳ 1,250",
- img:"https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=80"
+id:"RF-001",
+name:"Elegant Ladies Dress",
+price:"৳ 1,250",
+img:"https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=80"
 },
-
 {
- id:"RF-002",
- name:"Stylish Fashion Set",
- price:"৳ 1,450",
- img:"https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80"
+id:"RF-002",
+name:"Stylish Fashion Set",
+price:"৳ 1,450",
+img:"https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80"
 },
-
 {
- id:"RF-003",
- name:"Trendy Casual Outfit",
- price:"৳ 1,100",
- img:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=80"
+id:"RF-003",
+name:"Trendy Casual Outfit",
+price:"৳ 1,100",
+img:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=80"
 }
-
 ];
 
 let data=JSON.parse(localStorage.getItem("ruposhiData")||"null")||{
-
- shop:"Ruposhi Fashion",
-
- number:"01762547395",
-
- telegram:"@xbetmove12",
-
- products:DEFAULT_PRODUCTS
-
+shop:"Ruposhi Fashion",
+number:"01762547395",
+telegram:"@xbetmove12",
+products:DEFAULT_PRODUCTS
 };
 
-
-/* পুরোনো ডাটায় Product ID না থাকলে অটো তৈরি করবে */
-
 data.products.forEach((p,i)=>{
-
- if(!p.id){
-
-  p.id="RF-"+String(i+1).padStart(3,"0");
-
- }
-
+if(!p.id)p.id="RF-"+String(i+1).padStart(3,"0");
 });
-
 
 function render(){
 
- document.getElementById("shopName").textContent=data.shop;
+document.getElementById("shopName").textContent=data.shop;
+document.getElementById("mainNumber").textContent=data.number;
 
- ["bkash","nagad","rocket","whatsapp"].forEach(x=>
+let tg=data.telegram.replace(/^@/,"");
+document.getElementById("telegram").href="https://t.me/"+tg;
+document.getElementById("telegram").textContent="✈️ Telegram: "+data.telegram;
 
-  document.getElementById(x).textContent=data.number
+document.getElementById("products").innerHTML=data.products.map(p=>`
 
- );
+<article class="card">
 
- let tg=data.telegram.replace(/^@/,"");
+<img src="${p.img}">
 
- document.getElementById("telegram").href="https://t.me/"+tg;
+<div class="info">
 
- document.getElementById("telegram").textContent=
- "✈️ Telegram: "+data.telegram;
+<div class="product-no">
+Product No: ${p.id}
+</div>
 
+<h3>${p.name}</h3>
 
- document.getElementById("products").innerHTML=
+<div class="price">${p.price}</div>
 
- data.products.map((p,i)=>`
+<a class="btn" target="_blank"
+href="https://wa.me/88${data.number.replace(/\D/g,"")}?text=${
+encodeURIComponent(
+"আমি একটি প্রোডাক্ট অর্ডার করতে চাই।\n\n"+
+"Product No: "+p.id+"\n"+
+"Product Name: "+p.name+"\n"+
+"Price: "+p.price
+)
+}">
+📱 WhatsApp অর্ডার
+</a>
 
- <article class="card">
+</div>
+</article>
 
- <img src="${p.img}">
-
- <div class="info">
-
- <div class="product-no">
- Product No: ${p.id}
- </div>
-
- <h3>${p.name}</h3>
-
- <div class="price">${p.price}</div>
-
- <a class="btn"
- target="_blank"
- href="https://wa.me/88${data.number.replace(/\D/g,"")}?text=${
- encodeURIComponent(
- "আমি একটি প্রোডাক্ট অর্ডার করতে চাই।\n\n"+
- "Product No: "+p.id+
- "\nProduct Name: "+p.name+
- "\nPrice: "+p.price
- )
- }">
-
- 📱 WhatsApp অর্ডার
-
- </a>
-
- </div>
-
- </article>
-
- `).join("");
+`).join("");
 
 }
 
+function sendMoney(method){
+
+document.getElementById("paymentInfo").style.display="block";
+
+document.getElementById("payTitle").textContent=
+"💳 "+method+" Send Money";
+
+document.getElementById("payNumber").textContent=data.number;
+
+}
 
 function login(){
 
- let p=prompt("Admin Password লিখুন:");
+let p=prompt("Admin Password লিখুন:");
 
- if(p!=="12345"){
-
-  alert("পাসওয়ার্ড ভুল।");
-
-  return;
-
- }
-
- document.getElementById("admin").style.display="block";
-
- document.getElementById("aShop").value=data.shop;
-
- document.getElementById("aNumber").value=data.number;
-
- document.getElementById("aTelegram").value=data.telegram;
-
-
- document.getElementById("editList").innerHTML=
-
- data.products.map((p,i)=>`
-
- <div class="item-edit">
-
- <b>Product ${i+1}</b>
-
- <div class="field">
-
- <label>Product No.</label>
-
- <input id="pid${i}" value="${esc(p.id)}">
-
- </div>
-
-
- <div class="field">
-
- <label>নাম</label>
-
- <input id="pn${i}" value="${esc(p.name)}">
-
- </div>
-
-
- <div class="field">
-
- <label>দাম</label>
-
- <input id="pp${i}" value="${esc(p.price)}">
-
- </div>
-
-
- <div class="field">
-
- <label>ছবি আপলোড</label>
-
- <input
- id="pi${i}"
- type="file"
- accept="image/*"
- onchange="preview(${i},this)"
- >
-
- </div>
-
-
- <img id="prev${i}" src="${p.img}">
-
- </div>
-
- `).join("");
-
+if(p!=="12345"){
+alert("পাসওয়ার্ড ভুল।");
+return;
 }
 
+document.getElementById("admin").style.display="block";
+
+document.getElementById("aShop").value=data.shop;
+document.getElementById("aNumber").value=data.number;
+document.getElementById("aTelegram").value=data.telegram;
+
+document.getElementById("editList").innerHTML=data.products.map((p,i)=>`
+
+<div class="item-edit">
+
+<b>Product ${i+1}</b>
+
+<div class="field">
+<label>Product No.</label>
+<input id="pid${i}" value="${esc(p.id)}">
+</div>
+
+<div class="field">
+<label>নাম</label>
+<input id="pn${i}" value="${esc(p.name)}">
+</div>
+
+<div class="field">
+<label>দাম</label>
+<input id="pp${i}" value="${esc(p.price)}">
+</div>
+
+<div class="field">
+<label>ছবি আপলোড</label>
+<input id="pi${i}" type="file" accept="image/*" onchange="preview(${i},this)">
+</div>
+
+<img id="prev${i}" src="${p.img}">
+
+</div>
+
+`).join("");
+
+}
 
 function esc(s){
-
- return String(s)
-
- .replaceAll("&","&amp;")
-
- .replaceAll('"',"&quot;")
-
- .replaceAll("<","&lt;")
-
- .replaceAll(">","&gt;");
-
+return String(s)
+.replaceAll("&","&amp;")
+.replaceAll('"',"&quot;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;");
 }
-
 
 function preview(i,input){
 
- const f=input.files[0];
+const f=input.files[0];
+if(!f)return;
 
- if(!f)return;
+const r=new FileReader();
 
- const r=new FileReader();
+r.onload=e=>{
+data.products[i].img=e.target.result;
+document.getElementById("prev"+i).src=e.target.result;
+};
 
- r.onload=e=>{
-
-  data.products[i].img=e.target.result;
-
-  document.getElementById("prev"+i).src=e.target.result;
-
- };
-
- r.readAsDataURL(f);
+r.readAsDataURL(f);
 
 }
-
 
 function saveAll(){
 
- data.shop=
+data.shop=document.getElementById("aShop").value.trim()||"Ruposhi Fashion";
+data.number=document.getElementById("aNumber").value.trim();
+data.telegram=document.getElementById("aTelegram").value.trim();
 
- document.getElementById("aShop").value.trim()
+data.products.forEach((p,i)=>{
 
- ||"Ruposhi Fashion";
+p.id=document.getElementById("pid"+i).value.trim()
+||"RF-"+String(i+1).padStart(3,"0");
 
+p.name=document.getElementById("pn"+i).value;
+p.price=document.getElementById("pp"+i).value;
 
- data.number=
+});
 
- document.getElementById("aNumber").value.trim();
+try{
 
+localStorage.setItem("ruposhiData",JSON.stringify(data));
 
- data.telegram=
+render();
 
- document.getElementById("aTelegram").value.trim();
+alert("তথ্য সংরক্ষণ হয়েছে।");
 
+}catch(e){
 
- data.products.forEach((p,i)=>{
-
-  p.id=document.getElementById("pid"+i).value.trim()
-  ||"RF-"+String(i+1).padStart(3,"0");
-
-  p.name=document.getElementById("pn"+i).value;
-
-  p.price=document.getElementById("pp"+i).value;
-
- });
-
-
- try{
-
-  localStorage.setItem(
-   "ruposhiData",
-   JSON.stringify(data)
-  );
-
-  render();
-
-  alert("তথ্য সংরক্ষণ হয়েছে।");
-
- }
-
- catch(e){
-
-  alert(
-   "ছবির ফাইল অনেক বড় হওয়ায় সংরক্ষণ করা যাচ্ছে না। ছোট ছবি ব্যবহার করুন।"
-  );
-
- }
+alert("ছবির ফাইল অনেক বড়। ছোট ছবি ব্যবহার করুন।");
 
 }
 
+}
 
 function logout(){
-
- document.getElementById("admin").style.display="none";
-
+document.getElementById("admin").style.display="none";
 }
-
 
 render();
 
