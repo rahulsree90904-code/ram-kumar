@@ -2,44 +2,33 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>All ADDA – Chat • Audio • Video</title>
 
   <style>
     * {
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
     }
 
-    html,
     body {
       margin: 0;
-      height: 100%;
+      font-family: Arial, sans-serif;
       background: #eef1f3;
     }
 
-    body {
-      overflow: hidden;
-    }
-
     .app {
-      height: 100%;
       max-width: 520px;
       margin: auto;
-      background: #ffffff;
-      display: flex;
-      flex-direction: column;
+      min-height: 100vh;
+      background: white;
     }
 
-    /* Header */
     .header {
       height: 62px;
-      flex-shrink: 0;
       background: #075e54;
-      color: #ffffff;
-      padding: 10px 16px;
+      color: white;
+      padding: 0 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -49,87 +38,42 @@
       font-size: 23px;
     }
 
-    .header small {
-      font-size: 12px;
-      opacity: 0.9;
-    }
-
-    #connection {
-      font-size: 12px;
-    }
-
-    /* Main screen */
     .screen {
-      flex: 1;
-      min-height: 0;
-      overflow: auto;
       padding: 18px;
     }
 
-    .hidden {
-      display: none !important;
-    }
-
-    /* Inputs */
     input {
       width: 100%;
       padding: 13px;
       margin: 6px 0;
-      border: 1px solid #cccccc;
+      border: 1px solid #ccc;
       border-radius: 10px;
       font-size: 16px;
-      outline: none;
     }
 
-    input:focus {
-      border-color: #075e54;
-    }
-
-    /* Buttons */
     button {
+      width: 100%;
       border: 0;
       border-radius: 10px;
-      padding: 11px 15px;
+      padding: 12px 15px;
       background: #075e54;
-      color: #ffffff;
-      font-size: 15px;
+      color: white;
+      font-size: 16px;
       cursor: pointer;
-    }
-
-    button:active {
-      opacity: 0.8;
-    }
-
-    .primary {
-      width: 100%;
       margin-top: 8px;
     }
 
-    .muted {
-      background: #777777;
+    .secondary {
+      background: #777;
     }
 
-    /* Messages */
-    .error {
-      color: #b3261e;
-      min-height: 20px;
-      font-size: 13px;
-      margin-top: 6px;
-    }
-
-    .success {
-      color: #087f23;
-      font-size: 13px;
-      margin-top: 6px;
-    }
-
-    /* User list */
-    .userrow {
+    .user {
       display: flex;
       align-items: center;
       gap: 12px;
       padding: 13px 4px;
-      border-bottom: 1px solid #eeeeee;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
     }
 
     .avatar {
@@ -137,12 +81,11 @@
       height: 46px;
       border-radius: 50%;
       background: #128c7e;
-      color: #ffffff;
+      color: white;
       display: grid;
       place-items: center;
       font-weight: bold;
       font-size: 18px;
-      flex-shrink: 0;
     }
 
     .info {
@@ -151,19 +94,71 @@
 
     .name {
       font-weight: bold;
+      font-size: 17px;
     }
 
     .handle {
-      color: #777777;
-      font-size: 13px;
-      margin-top: 3px;
+      color: #777;
+      margin-top: 4px;
     }
 
-    .status {
+    .error {
+      color: #b3261e;
+      min-height: 20px;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .chat-box {
+      height: 55vh;
+      overflow-y: auto;
       padding: 10px;
+      background: #f4f4f4;
       border-radius: 10px;
-      background: #f1f1f1;
-      margin-bottom: 12px;
+    }
+
+    .message {
+      max-width: 78%;
+      padding: 9px 12px;
+      margin: 7px 0;
+      border-radius: 12px;
+      word-wrap: break-word;
+    }
+
+    .mine {
+      margin-left: auto;
+      background: #dcf8c6;
+    }
+
+    .theirs {
+      margin-right: auto;
+      background: white;
+    }
+
+    .chat-input {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .chat-input input {
+      margin: 0;
+      flex: 1;
+    }
+
+    .chat-input button {
+      width: 90px;
+      margin: 0;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 18px;
     }
 
     .note {
@@ -178,501 +173,578 @@
 
 <body>
 
-  <div class="app">
+<div class="app">
 
-    <!-- Header -->
-    <div class="header">
+  <div class="header">
+    <b>All ADDA</b>
+    <span>Chat • Audio • Video</span>
+  </div>
 
-      <div>
-        <b>All ADDA</b><br>
-        <small>Chat • Audio • Video</small>
-      </div>
+  <!-- PROFILE -->
+  <div id="profileScreen" class="screen">
 
-      <div id="connection">
-        Connecting...
-      </div>
+    <div class="title">আপনার প্রোফাইল</div>
 
-    </div>
+    <p>একটি নাম ও ইউনিক Username দিন।</p>
 
+    <input id="nameInput" placeholder="আপনার নাম">
 
-    <!-- Profile Screen -->
-    <div id="profileScreen" class="screen">
+    <input id="usernameInput" placeholder="Username">
 
-      <h2>আপনার প্রোফাইল</h2>
+    <div id="profileError" class="error"></div>
 
-      <p>
-        একটি নাম ও ইউনিক Username দিন।
-      </p>
+    <button onclick="saveProfile()">Continue</button>
 
-      <input
-        id="nameInput"
-        type="text"
-        placeholder="আপনার নাম"
-      >
-
-      <input
-        id="usernameInput"
-        type="text"
-        placeholder="Username"
-      >
-
-      <div id="profileError" class="error"></div>
-
-      <button
-        class="primary"
-        onclick="saveProfile()">
-        Continue
-      </button>
-
-      <div class="note">
-        আপনার Username অন্যদের থেকে আলাদা হওয়া উচিত।
-      </div>
-
-    </div>
-
-
-    <!-- Home Screen -->
-    <div id="homeScreen" class="screen hidden">
-
-      <h2>All ADDA</h2>
-
-      <div class="status">
-
-        <b id="welcomeName"></b>
-
-        <br>
-
-        <span id="welcomeUsername"></span>
-
-      </div>
-
-      <button
-        class="primary"
-        onclick="loadUsers()">
-        Users Refresh
-      </button>
-
-      <div id="users"></div>
-
-      <button
-        class="primary muted"
-        onclick="logout()">
-        Logout
-      </button>
-
+    <div class="note">
+      Username অন্যদের থেকে আলাদা হতে হবে।
     </div>
 
   </div>
 
 
-  <!-- Firebase SDK -->
-  <script type="module">
+  <!-- HOME -->
+  <div id="homeScreen" class="screen hidden">
 
-    import {
-      initializeApp
-    } from
-    "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+    <div class="title">All ADDA</div>
 
-    import {
-      getFirestore,
-      collection,
-      doc,
-      setDoc,
-      getDocs,
-      query,
-      orderBy,
-      serverTimestamp
-    } from
-    "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+    <div id="myProfile"></div>
+
+    <button onclick="loadUsers()">Users Refresh</button>
+
+    <div id="usersList"></div>
+
+    <button class="secondary" onclick="logout()">Logout</button>
+
+  </div>
 
 
-    /* ==========================================
-       FIREBASE CONFIGURATION
-       ========================================== */
+  <!-- CHAT -->
+  <div id="chatScreen" class="screen hidden">
 
-    const firebaseConfig = {
+    <button onclick="backHome()">← Back</button>
 
-      apiKey:
-        "AIzaSyAk4ypWTZ_2DEkJC8_T9JvJgqvCEoX38Rk",
+    <div id="chatTitle" class="title"></div>
 
-      authDomain:
-        "all-adda-bfe4e.firebaseapp.com",
+    <div id="chatBox" class="chat-box"></div>
 
-      projectId:
-        "all-adda-bfe4e",
+    <div class="chat-input">
+      <input id="messageInput" placeholder="মেসেজ লিখুন...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
 
-      storageBucket:
-        "all-adda-bfe4e.firebasestorage.app",
+    <div id="chatError" class="error"></div>
 
-      messagingSenderId:
-        "236442476565",
+  </div>
 
-      appId:
-        "1:236442476565:web:cd357d47cbdeb0163fae1c"
-    };
+</div>
 
 
-    /* ==========================================
-       INITIALIZE FIREBASE
-       ========================================== */
+<script type="module">
 
-    let db = null;
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    doc,
+    setDoc,
+    query,
+    orderBy,
+    onSnapshot,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+  /* FIREBASE */
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAk4ypWTZ_2DEkJC8_T9JvJgqvCEoX38Rk",
+    authDomain: "all-adda-bfe4e.firebaseapp.com",
+    projectId: "all-adda-bfe4e",
+    storageBucket: "all-adda-bfe4e.firebasestorage.app",
+    messagingSenderId: "236442476565",
+    appId: "1:236442476565:web:cd357d47cbdeb0163fae1c"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  const db = getFirestore(app);
+
+
+  /* CURRENT USER */
+
+  let currentUser = JSON.parse(
+    localStorage.getItem("allAddaUser") || "null"
+  );
+
+  let selectedUser = null;
+
+  let stopMessages = null;
+
+
+  /* START APP */
+
+  if (currentUser) {
+    showHome();
+    loadUsers();
+  } else {
+    showProfile();
+  }
+
+
+  /* PROFILE */
+
+  window.saveProfile = async function () {
+
+    const name =
+      document.getElementById("nameInput").value.trim();
+
+    const username =
+      document.getElementById("usernameInput").value.trim();
+
+
+    if (!name || !username) {
+      document.getElementById("profileError").innerText =
+        "নাম ও Username দুটোই দিন।";
+      return;
+    }
+
 
     try {
 
-      const app =
-        initializeApp(firebaseConfig);
+      const usersRef = collection(db, "users");
 
-      db = getFirestore(app);
+      const snapshot = await getDocs(usersRef);
 
-      document.getElementById("connection")
-        .innerText = "Firebase ✓";
+      let exists = false;
 
-      console.log(
-        "Firebase connected successfully."
+      snapshot.forEach((item) => {
+
+        const data = item.data();
+
+        if (
+          data.username &&
+          data.username.toLowerCase() === username.toLowerCase()
+        ) {
+          exists = true;
+        }
+
+      });
+
+
+      if (exists) {
+
+        document.getElementById("profileError").innerText =
+          "এই Username ইতিমধ্যে ব্যবহার করা হয়েছে।";
+
+        return;
+      }
+
+
+      const userRef = doc(usersRef);
+
+      await setDoc(userRef, {
+
+        name: name,
+
+        username: username,
+
+        createdAt: serverTimestamp()
+
+      });
+
+
+      currentUser = {
+
+        id: userRef.id,
+
+        name: name,
+
+        username: username
+
+      };
+
+
+      localStorage.setItem(
+        "allAddaUser",
+        JSON.stringify(currentUser)
       );
+
+
+      showHome();
+
+      loadUsers();
+
 
     } catch (error) {
 
-      console.error(
-        "Firebase connection error:",
-        error
-      );
+      console.error(error);
 
-      document.getElementById("connection")
-        .innerText = "Firebase ✕";
+      document.getElementById("profileError").innerText =
+        "Profile save করা যায়নি: " + error.message;
+
     }
 
-
-    /* ==========================================
-       SAVE PROFILE
-       ========================================== */
-
-    window.saveProfile = async function () {
-
-      const name =
-        document
-          .getElementById("nameInput")
-          .value
-          .trim();
-
-      const username =
-        document
-          .getElementById("usernameInput")
-          .value
-          .trim()
-          .toLowerCase();
-
-      const errorBox =
-        document.getElementById("profileError");
-
-      errorBox.innerText = "";
+  };
 
 
-      if (!name || !username) {
+  /* USERS */
 
-        errorBox.innerText =
-          "নাম এবং Username দুটোই দিন।";
+  window.loadUsers = async function () {
 
-        return;
-      }
+    const list =
+      document.getElementById("usersList");
 
-
-      if (!db) {
-
-        errorBox.innerText =
-          "Firebase connection হয়নি।";
-
-        return;
-      }
+    list.innerHTML = "Loading users...";
 
 
-      try {
+    try {
 
-        const userData = {
+      const snapshot =
+        await getDocs(collection(db, "users"));
 
-          name: name,
 
-          username: username,
+      list.innerHTML = "";
 
-          createdAt:
-            serverTimestamp()
+
+      snapshot.forEach((item) => {
+
+        const user = {
+
+          id: item.id,
+
+          ...item.data()
+
         };
 
 
-        await setDoc(
-
-          doc(
-            db,
-            "users",
-            username
-          ),
-
-          userData
-
-        );
-
-
-        localStorage.setItem(
-
-          "allAddaProfile",
-
-          JSON.stringify({
-
-            name: name,
-
-            username: username
-
-          })
-
-        );
-
-
-        showHome(
-          name,
-          username
-        );
-
-
-      } catch (error) {
-
-        console.error(error);
-
-        errorBox.innerText =
-          "Profile save করা যায়নি: "
-          + error.message;
-      }
-    };
-
-
-    /* ==========================================
-       SHOW HOME
-       ========================================== */
-
-    window.showHome = function (
-      name,
-      username
-    ) {
-
-      document
-        .getElementById("profileScreen")
-        .classList
-        .add("hidden");
-
-
-      document
-        .getElementById("homeScreen")
-        .classList
-        .remove("hidden");
-
-
-      document
-        .getElementById("welcomeName")
-        .innerText = name;
-
-
-      document
-        .getElementById("welcomeUsername")
-        .innerText =
-          "@" + username;
-
-
-      loadUsers();
-    };
-
-
-    /* ==========================================
-       LOAD USERS
-       ========================================== */
-
-    window.loadUsers = async function () {
-
-      const usersBox =
-        document.getElementById("users");
-
-      usersBox.innerHTML =
-        "<p>Users loading...</p>";
-
-
-      if (!db) {
-
-        usersBox.innerHTML =
-          "<p class='error'>Firebase connection হয়নি।</p>";
-
-        return;
-      }
-
-
-      try {
-
-        const usersQuery =
-          query(
-            collection(db, "users"),
-            orderBy("createdAt", "desc")
-          );
-
-
-        const snapshot =
-          await getDocs(usersQuery);
-
-
-        usersBox.innerHTML = "";
-
-
-        snapshot.forEach(
-          (userDocument) => {
-
-            const user =
-              userDocument.data();
-
-
-            const row =
-              document.createElement("div");
-
-
-            row.className =
-              "userrow";
-
-
-            const firstLetter =
-              user.name
-                ? user.name
-                    .charAt(0)
-                    .toUpperCase()
-                : "U";
-
-
-            row.innerHTML = `
-
-              <div class="avatar">
-                ${escapeHtml(firstLetter)}
-              </div>
-
-              <div class="info">
-
-                <div class="name">
-                  ${escapeHtml(user.name || "User")}
-                </div>
-
-                <div class="handle">
-                  @${escapeHtml(user.username || "")}
-                </div>
-
-              </div>
-
-            `;
-
-
-            usersBox.appendChild(row);
-
-          }
-        );
-
-
-        if (snapshot.empty) {
-
-          usersBox.innerHTML =
-            "<p>এখনও কোনো user নেই।</p>";
-        }
-
-
-      } catch (error) {
-
-        console.error(error);
-
-        usersBox.innerHTML =
-          "<p class='error'>" +
-          "Users load করা যায়নি: " +
-          escapeHtml(error.message) +
-          "</p>";
-      }
-    };
-
-
-    /* ==========================================
-       LOGOUT
-       ========================================== */
-
-    window.logout = function () {
-
-      localStorage.removeItem(
-        "allAddaProfile"
-      );
-
-      location.reload();
-    };
-
-
-    /* ==========================================
-       SECURITY: ESCAPE HTML
-       ========================================== */
-
-    function escapeHtml(text) {
-
-      return String(text)
-
-        .replaceAll("&", "&amp;")
-
-        .replaceAll("<", "&lt;")
-
-        .replaceAll(">", "&gt;")
-
-        .replaceAll('"', "&quot;")
-
-        .replaceAll("'", "&#039;");
-    }
-
-
-    /* ==========================================
-       LOAD SAVED PROFILE
-       ========================================== */
-
-    window.addEventListener(
-      "load",
-      () => {
-
-        const saved =
-          localStorage.getItem(
-            "allAddaProfile"
-          );
-
-
-        if (!saved) {
+        if (user.id === currentUser.id) {
           return;
         }
 
 
-        try {
+        const div =
+          document.createElement("div");
 
-          const profile =
-            JSON.parse(saved);
-
-
-          if (
-            profile.name &&
-            profile.username
-          ) {
-
-            showHome(
-              profile.name,
-              profile.username
-            );
-          }
+        div.className = "user";
 
 
-        } catch (error) {
+        div.innerHTML = `
 
-          console.error(error);
+          <div class="avatar">
+            ${(user.name || "U").charAt(0).toUpperCase()}
+          </div>
 
-          localStorage.removeItem(
-            "allAddaProfile"
-          );
-        }
+          <div class="info">
+
+            <div class="name">
+              ${escapeHtml(user.name || "Unknown")}
+            </div>
+
+            <div class="handle">
+              @${escapeHtml(user.username || "")}
+            </div>
+
+          </div>
+
+        `;
+
+
+        div.onclick = () => openChat(user);
+
+
+        list.appendChild(div);
+
+      });
+
+
+      if (!list.innerHTML) {
+
+        list.innerHTML =
+          "<p>অন্য কোনো User এখনো নেই।</p>";
 
       }
-    );
 
-  </script>
+
+    } catch (error) {
+
+      console.error(error);
+
+      list.innerHTML =
+        "<div class='error'>Users load করা যায়নি।</div>";
+
+    }
+
+  };
+
+
+  /* OPEN CHAT */
+
+  window.openChat = function (user) {
+
+    selectedUser = user;
+
+    document.getElementById("homeScreen")
+      .classList.add("hidden");
+
+    document.getElementById("chatScreen")
+      .classList.remove("hidden");
+
+
+    document.getElementById("chatTitle").innerText =
+      user.name + "  @" + user.username;
+
+
+    document.getElementById("chatBox").innerHTML =
+      "Loading messages...";
+
+
+    listenMessages();
+
+  };
+
+
+  /* REAL-TIME MESSAGES */
+
+  function listenMessages() {
+
+    if (stopMessages) {
+      stopMessages();
+    }
+
+
+    const messagesRef =
+      collection(db, "messages");
+
+
+    const q =
+      query(messagesRef, orderBy("createdAt"));
+
+
+    stopMessages = onSnapshot(q, (snapshot) => {
+
+      const box =
+        document.getElementById("chatBox");
+
+      box.innerHTML = "";
+
+
+      snapshot.forEach((item) => {
+
+        const msg = item.data();
+
+
+        const isMine =
+          msg.senderId === currentUser.id &&
+          msg.receiverId === selectedUser.id;
+
+
+        const isTheirs =
+          msg.senderId === selectedUser.id &&
+          msg.receiverId === currentUser.id;
+
+
+        if (!isMine && !isTheirs) {
+          return;
+        }
+
+
+        const div =
+          document.createElement("div");
+
+
+        div.className =
+          "message " +
+          (isMine ? "mine" : "theirs");
+
+
+        div.innerText =
+          msg.text || "";
+
+
+        box.appendChild(div);
+
+      });
+
+
+      box.scrollTop = box.scrollHeight;
+
+    });
+
+  }
+
+
+  /* SEND MESSAGE */
+
+  window.sendMessage = async function () {
+
+    const input =
+      document.getElementById("messageInput");
+
+    const text =
+      input.value.trim();
+
+
+    if (!text || !selectedUser) {
+      return;
+    }
+
+
+    try {
+
+      await addDoc(
+        collection(db, "messages"),
+        {
+
+          senderId: currentUser.id,
+
+          senderName: currentUser.name,
+
+          receiverId: selectedUser.id,
+
+          receiverName: selectedUser.name,
+
+          text: text,
+
+          createdAt: serverTimestamp()
+
+        }
+      );
+
+
+      input.value = "";
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      document.getElementById("chatError").innerText =
+        "Message পাঠানো যায়নি: " + error.message;
+
+    }
+
+  };
+
+
+  /* BACK */
+
+  window.backHome = function () {
+
+    if (stopMessages) {
+      stopMessages();
+      stopMessages = null;
+    }
+
+    selectedUser = null;
+
+    document.getElementById("chatScreen")
+      .classList.add("hidden");
+
+    document.getElementById("homeScreen")
+      .classList.remove("hidden");
+
+    loadUsers();
+
+  };
+
+
+  /* HOME */
+
+  function showHome() {
+
+    document.getElementById("profileScreen")
+      .classList.add("hidden");
+
+    document.getElementById("chatScreen")
+      .classList.add("hidden");
+
+    document.getElementById("homeScreen")
+      .classList.remove("hidden");
+
+
+    document.getElementById("myProfile").innerHTML = `
+
+      <div class="user">
+
+        <div class="avatar">
+          ${(currentUser.name || "U").charAt(0).toUpperCase()}
+        </div>
+
+        <div class="info">
+
+          <div class="name">
+            ${escapeHtml(currentUser.name)}
+          </div>
+
+          <div class="handle">
+            @${escapeHtml(currentUser.username)}
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* PROFILE */
+
+  function showProfile() {
+
+    document.getElementById("profileScreen")
+      .classList.remove("hidden");
+
+    document.getElementById("homeScreen")
+      .classList.add("hidden");
+
+    document.getElementById("chatScreen")
+      .classList.add("hidden");
+
+  }
+
+
+  /* LOGOUT */
+
+  window.logout = function () {
+
+    localStorage.removeItem("allAddaUser");
+
+    currentUser = null;
+
+    if (stopMessages) {
+      stopMessages();
+    }
+
+    showProfile();
+
+  };
+
+
+  /* HTML SAFETY */
+
+  function escapeHtml(text) {
+
+    return String(text)
+
+      .replaceAll("&", "&amp;")
+
+      .replaceAll("<", "&lt;")
+
+      .replaceAll(">", "&gt;")
+
+      .replaceAll('"', "&quot;")
+
+      .replaceAll("'", "&#039;");
+
+  }
+
+</script>
 
 </body>
 </html>
