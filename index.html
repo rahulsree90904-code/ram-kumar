@@ -1,59 +1,678 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>All ADDA — Chat & Calls</title>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-<style>
-*{box-sizing:border-box}
-html,body{margin:0;height:100%;font-family:Arial,sans-serif;background:#eef1f3}
-body{overflow:hidden}
-.app{height:100%;max-width:520px;margin:auto;background:#fff;display:flex;flex-direction:column}
+  <title>All ADDA – Chat • Audio • Video</title>
 
-.header{
-height:62px;flex-shrink:0;background:#075e54;color:#fff;
-padding:0 16px;display:flex;align-items:center;justify-content:space-between
-}
-.header b{font-size:23px}
-.header small{font-size:12px;opacity:.9}
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-.screen{flex:1;min-height:0;overflow:auto;padding:18px}
-.hidden{display:none!important}
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+      background: #eef1f3;
+    }
 
-input{
-width:100%;padding:13px;margin:6px 0;border:1px solid #ccc;
-border-radius:10px;font-size:16px
-}
+    body {
+      overflow: hidden;
+    }
 
-button{
-border:0;border-radius:10px;padding:11px 15px;
-background:#075e54;color:#fff;font-size:15px;cursor:pointer
-}
+    .app {
+      height: 100%;
+      max-width: 520px;
+      margin: auto;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+    }
 
-.primary{width:100%;margin-top:8px}
-.muted{background:#777}
-.danger{background:#b3261e}
-.callbtn{background:#128c7e}
+    /* Header */
+    .header {
+      height: 62px;
+      flex-shrink: 0;
+      background: #075e54;
+      color: #ffffff;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-.note{
-background:#fff8e1;padding:11px;border-radius:10px;
-font-size:13px;margin:10px 0
-}
+    .header b {
+      font-size: 23px;
+    }
 
-.error{color:#b3261e;min-height:20px;font-size:13px}
+    .header small {
+      font-size: 12px;
+      opacity: 0.9;
+    }
 
-.userrow{
-display:flex;align-items:center;gap:12px;padding:13px 4px;
-border-bottom:1px solid #eee;cursor:pointer
-}
+    #connection {
+      font-size: 12px;
+    }
 
-.avatar{
-width:46px;height:46px;border-radius:50%;
-background:#128c7e;color:white;display:grid;
-place-items:center;font-weight:bold;font-size:18px
-}
+    /* Main screen */
+    .screen {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+      padding: 18px;
+    }
 
-.info{flex:1}
-.name{font-weight:bold}
-.handle
+    .hidden {
+      display: none !important;
+    }
+
+    /* Inputs */
+    input {
+      width: 100%;
+      padding: 13px;
+      margin: 6px 0;
+      border: 1px solid #cccccc;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #075e54;
+    }
+
+    /* Buttons */
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 15px;
+      background: #075e54;
+      color: #ffffff;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    button:active {
+      opacity: 0.8;
+    }
+
+    .primary {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .muted {
+      background: #777777;
+    }
+
+    /* Messages */
+    .error {
+      color: #b3261e;
+      min-height: 20px;
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    .success {
+      color: #087f23;
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    /* User list */
+    .userrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 4px;
+      border-bottom: 1px solid #eeeeee;
+    }
+
+    .avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: #128c7e;
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-weight: bold;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .info {
+      flex: 1;
+    }
+
+    .name {
+      font-weight: bold;
+    }
+
+    .handle {
+      color: #777777;
+      font-size: 13px;
+      margin-top: 3px;
+    }
+
+    .status {
+      padding: 10px;
+      border-radius: 10px;
+      background: #f1f1f1;
+      margin-bottom: 12px;
+    }
+
+    .note {
+      background: #fff8e1;
+      padding: 11px;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <!-- Header -->
+    <div class="header">
+
+      <div>
+        <b>All ADDA</b><br>
+        <small>Chat • Audio • Video</small>
+      </div>
+
+      <div id="connection">
+        Connecting...
+      </div>
+
+    </div>
+
+
+    <!-- Profile Screen -->
+    <div id="profileScreen" class="screen">
+
+      <h2>আপনার প্রোফাইল</h2>
+
+      <p>
+        একটি নাম ও ইউনিক Username দিন।
+      </p>
+
+      <input
+        id="nameInput"
+        type="text"
+        placeholder="আপনার নাম"
+      >
+
+      <input
+        id="usernameInput"
+        type="text"
+        placeholder="Username"
+      >
+
+      <div id="profileError" class="error"></div>
+
+      <button
+        class="primary"
+        onclick="saveProfile()">
+        Continue
+      </button>
+
+      <div class="note">
+        আপনার Username অন্যদের থেকে আলাদা হওয়া উচিত।
+      </div>
+
+    </div>
+
+
+    <!-- Home Screen -->
+    <div id="homeScreen" class="screen hidden">
+
+      <h2>All ADDA</h2>
+
+      <div class="status">
+
+        <b id="welcomeName"></b>
+
+        <br>
+
+        <span id="welcomeUsername"></span>
+
+      </div>
+
+      <button
+        class="primary"
+        onclick="loadUsers()">
+        Users Refresh
+      </button>
+
+      <div id="users"></div>
+
+      <button
+        class="primary muted"
+        onclick="logout()">
+        Logout
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- Firebase SDK -->
+  <script type="module">
+
+    import {
+      initializeApp
+    } from
+    "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+    import {
+      getFirestore,
+      collection,
+      doc,
+      setDoc,
+      getDocs,
+      query,
+      orderBy,
+      serverTimestamp
+    } from
+    "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+    /* ==========================================
+       FIREBASE CONFIGURATION
+       ========================================== */
+
+    const firebaseConfig = {
+
+      apiKey:
+        "AIzaSyAk4ypWTZ_2DEkJC8_T9JvJgqvCEoX38Rk",
+
+      authDomain:
+        "all-adda-bfe4e.firebaseapp.com",
+
+      projectId:
+        "all-adda-bfe4e",
+
+      storageBucket:
+        "all-adda-bfe4e.firebasestorage.app",
+
+      messagingSenderId:
+        "236442476565",
+
+      appId:
+        "1:236442476565:web:cd357d47cbdeb0163fae1c"
+    };
+
+
+    /* ==========================================
+       INITIALIZE FIREBASE
+       ========================================== */
+
+    let db = null;
+
+    try {
+
+      const app =
+        initializeApp(firebaseConfig);
+
+      db = getFirestore(app);
+
+      document.getElementById("connection")
+        .innerText = "Firebase ✓";
+
+      console.log(
+        "Firebase connected successfully."
+      );
+
+    } catch (error) {
+
+      console.error(
+        "Firebase connection error:",
+        error
+      );
+
+      document.getElementById("connection")
+        .innerText = "Firebase ✕";
+    }
+
+
+    /* ==========================================
+       SAVE PROFILE
+       ========================================== */
+
+    window.saveProfile = async function () {
+
+      const name =
+        document
+          .getElementById("nameInput")
+          .value
+          .trim();
+
+      const username =
+        document
+          .getElementById("usernameInput")
+          .value
+          .trim()
+          .toLowerCase();
+
+      const errorBox =
+        document.getElementById("profileError");
+
+      errorBox.innerText = "";
+
+
+      if (!name || !username) {
+
+        errorBox.innerText =
+          "নাম এবং Username দুটোই দিন।";
+
+        return;
+      }
+
+
+      if (!db) {
+
+        errorBox.innerText =
+          "Firebase connection হয়নি।";
+
+        return;
+      }
+
+
+      try {
+
+        const userData = {
+
+          name: name,
+
+          username: username,
+
+          createdAt:
+            serverTimestamp()
+        };
+
+
+        await setDoc(
+
+          doc(
+            db,
+            "users",
+            username
+          ),
+
+          userData
+
+        );
+
+
+        localStorage.setItem(
+
+          "allAddaProfile",
+
+          JSON.stringify({
+
+            name: name,
+
+            username: username
+
+          })
+
+        );
+
+
+        showHome(
+          name,
+          username
+        );
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        errorBox.innerText =
+          "Profile save করা যায়নি: "
+          + error.message;
+      }
+    };
+
+
+    /* ==========================================
+       SHOW HOME
+       ========================================== */
+
+    window.showHome = function (
+      name,
+      username
+    ) {
+
+      document
+        .getElementById("profileScreen")
+        .classList
+        .add("hidden");
+
+
+      document
+        .getElementById("homeScreen")
+        .classList
+        .remove("hidden");
+
+
+      document
+        .getElementById("welcomeName")
+        .innerText = name;
+
+
+      document
+        .getElementById("welcomeUsername")
+        .innerText =
+          "@" + username;
+
+
+      loadUsers();
+    };
+
+
+    /* ==========================================
+       LOAD USERS
+       ========================================== */
+
+    window.loadUsers = async function () {
+
+      const usersBox =
+        document.getElementById("users");
+
+      usersBox.innerHTML =
+        "<p>Users loading...</p>";
+
+
+      if (!db) {
+
+        usersBox.innerHTML =
+          "<p class='error'>Firebase connection হয়নি।</p>";
+
+        return;
+      }
+
+
+      try {
+
+        const usersQuery =
+          query(
+            collection(db, "users"),
+            orderBy("createdAt", "desc")
+          );
+
+
+        const snapshot =
+          await getDocs(usersQuery);
+
+
+        usersBox.innerHTML = "";
+
+
+        snapshot.forEach(
+          (userDocument) => {
+
+            const user =
+              userDocument.data();
+
+
+            const row =
+              document.createElement("div");
+
+
+            row.className =
+              "userrow";
+
+
+            const firstLetter =
+              user.name
+                ? user.name
+                    .charAt(0)
+                    .toUpperCase()
+                : "U";
+
+
+            row.innerHTML = `
+
+              <div class="avatar">
+                ${escapeHtml(firstLetter)}
+              </div>
+
+              <div class="info">
+
+                <div class="name">
+                  ${escapeHtml(user.name || "User")}
+                </div>
+
+                <div class="handle">
+                  @${escapeHtml(user.username || "")}
+                </div>
+
+              </div>
+
+            `;
+
+
+            usersBox.appendChild(row);
+
+          }
+        );
+
+
+        if (snapshot.empty) {
+
+          usersBox.innerHTML =
+            "<p>এখনও কোনো user নেই।</p>";
+        }
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        usersBox.innerHTML =
+          "<p class='error'>" +
+          "Users load করা যায়নি: " +
+          escapeHtml(error.message) +
+          "</p>";
+      }
+    };
+
+
+    /* ==========================================
+       LOGOUT
+       ========================================== */
+
+    window.logout = function () {
+
+      localStorage.removeItem(
+        "allAddaProfile"
+      );
+
+      location.reload();
+    };
+
+
+    /* ==========================================
+       SECURITY: ESCAPE HTML
+       ========================================== */
+
+    function escapeHtml(text) {
+
+      return String(text)
+
+        .replaceAll("&", "&amp;")
+
+        .replaceAll("<", "&lt;")
+
+        .replaceAll(">", "&gt;")
+
+        .replaceAll('"', "&quot;")
+
+        .replaceAll("'", "&#039;");
+    }
+
+
+    /* ==========================================
+       LOAD SAVED PROFILE
+       ========================================== */
+
+    window.addEventListener(
+      "load",
+      () => {
+
+        const saved =
+          localStorage.getItem(
+            "allAddaProfile"
+          );
+
+
+        if (!saved) {
+          return;
+        }
+
+
+        try {
+
+          const profile =
+            JSON.parse(saved);
+
+
+          if (
+            profile.name &&
+            profile.username
+          ) {
+
+            showHome(
+              profile.name,
+              profile.username
+            );
+          }
+
+
+        } catch (error) {
+
+          console.error(error);
+
+          localStorage.removeItem(
+            "allAddaProfile"
+          );
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
